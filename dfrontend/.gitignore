@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+*/assets/dummy_media
+
 # testing
 /coverage
 
