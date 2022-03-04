@@ -13,5 +13,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ILEO_FA306 }}'
-          projectId: ileo-fa306
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DONATELLO_A5E2E }}'
+          projectId: donatello-a5e2e
