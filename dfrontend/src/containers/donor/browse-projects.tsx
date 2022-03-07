@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ProjectCard from './containers/project-card';
+import ProjectCard from '../../components/project-card';
 
 const ProjectBrowser = () => {
 	
