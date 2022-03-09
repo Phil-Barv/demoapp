@@ -6,6 +6,10 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 import {BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 import DonorView from './containers/donor';
+import ProjectBrowser from './containers/donor/browse-projects';
+import YourDonations from './containers/donor/your-donations';
+import EditProfile from './containers/donor/edit-profile';
+
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 
@@ -35,14 +39,12 @@ const App2 = () => {
 
   return(
     <Routes>
-      <Route path="/login" element={<Login/>}>
-      </Route>
-      <Route path="/" element={<DonorView/>}>
-      </Route>
-      <Route path="/register" element={<Register/>}>
-      </Route>
-      <Route path="*" element={<DonorView/>}>
-      </Route>
+      <Route path="/login" element={<Login/>}> </Route>
+      <Route path="/register" element={<Register/>}> </Route>
+      <Route path="/edit-profile" element={<DonorView view={<EditProfile />}/>}> </Route>
+      <Route path="/" element={<DonorView view={<YourDonations />}/>}> </Route>
+      <Route path="/browse" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
+      <Route path="*" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
     </Routes>
   )
 }
