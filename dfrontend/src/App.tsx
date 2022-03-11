@@ -1,41 +1,52 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter } from 'react-router-dom';
-import App2 from './App2';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, db } from "./firebase";
+import { query, collection, getDocs, where } from "firebase/firestore";
 
-class ErrorBoundary extends React.Component {
-  constructor(props:any) {
-    super(props);
-    this.state = { hasError: false };
-  }
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
-  static getDerivedStateFromError(error:any) {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
-  }
+import DonorView from './containers/donor';
+import ProjectBrowser from './containers/donor/browse-projects';
+import YourDonations from './containers/donor/your-donations';
+import EditProfile from './containers/donor/edit-profile';
 
-  componentDidCatch(error:any, errorInfo:any) {
-    // You can also log the error to an error reporting service
-    console.log(error, errorInfo);
-  };
+import Login from './components/login/Login';
+import Register from './components/register/Register';
 
-  render() {
-    if (!this.state) {
-      // You can render any custom fallback UI
-      return <h1>Something went wrong.</h1>;
-    }
-
-    return this.props.children; 
-  }
-}
+import './App.css';
 
 const App = () => {
 
+  const [user, loading, error] = useAuthState(auth);
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
+  const fetchUserName = async () => {
+    try {
+      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const doc = await getDocs(q);
+      const data = doc.docs[0].data();
+      setName(data.name);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  
+  useEffect(() => {
+    if (loading) return;
+    if (!user) {navigate('/login')};
+    if (user) {fetchUserName()};
+  }, [user, loading]);
+
   return(
-      <ErrorBoundary>
-      <BrowserRouter>
-          <App2/>
-      </BrowserRouter>
-      </ErrorBoundary>
+    <Routes>
+      <Route path="/login" element={<Login/>}> </Route>
+      <Route path="/register" element={<Register/>}> </Route>
+      <Route path="/edit-profile" element={<DonorView view={<EditProfile />}/>}> </Route>
+      <Route path="/my-profile" element={<DonorView view={<YourDonations />}/>}> </Route>
+      <Route path="/browse" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
+      <Route path="/" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
+      <Route path="*" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
+    </Routes>
   )
 }
 
