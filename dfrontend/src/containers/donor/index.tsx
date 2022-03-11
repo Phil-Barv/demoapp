@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
@@ -18,13 +18,35 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 import { logout } from "src/firebase";
 
-import ProjectBrowser from "./browse-projects";
+import { getDatabase, get, ref, child, push, update, onValue } from 'firebase/database';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./../../firebase";
+
+import ProjectBrowser from './browse-projects';
+import YourDonations from './your-donations';
+import EditProfile from './edit-profile';
+
 
 interface DonorViewProps {
-  view: JSX.Element
+  view: string
 }
 
 function DonorView(props:DonorViewProps) {
+
+  const db = getDatabase();
+  const [user, loading, error] = useAuthState(auth);
+  const [donorID, setDonorID] = useState(-10);
+  const [triggered, setTriggered] = useState(false);
+
+  if (!triggered && user){
+    setTriggered(true);
+    const getDonorRef = ref(db, 'Donor');
+    onValue(getDonorRef, (snapshot:any) => {
+      const data = snapshot.val();
+      data.filter((data:any) => (data.uid==user.uid)) ;
+      setDonorID(data[0].pk);
+    });
+  };
 
   const navigate = useNavigate();
   const goToBrowse = () => {
@@ -36,6 +58,18 @@ function DonorView(props:DonorViewProps) {
   const goToYourDonations = () => {
     navigate("/my-profile")
   }
+
+  const renderView = () => {
+    switch(props.view){
+      case "project_browser":
+        return <ProjectBrowser donorID={donorID} />
+      case "your_donations":
+        return <YourDonations donorID={donorID} />
+      case "edit_profile":
+        return<EditProfile donorID={donorID} />
+    }
+  }
+
 
   return (
       <Stack>
@@ -94,7 +128,7 @@ function DonorView(props:DonorViewProps) {
           </List>
     </Stack>
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {props.view}
+          {renderView()}
           </Container>
         </Stack>
       </Stack>

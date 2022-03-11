@@ -8,7 +8,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import ProjectCard from '../../components/project-card';
 import { getDatabase, ref, onValue} from "firebase/database";
 
-const ProjectBrowser = () => {
+
+interface browseProjectsProps{
+  donorID: number
+}
+
+
+const ProjectBrowser = (props: browseProjectsProps) => {
 
   const [projects, setProjects] = useState([""]);
   const [queried, setQueried] = useState(false);
@@ -44,6 +50,7 @@ const ProjectBrowser = () => {
                 description={project["description"]}
                 raised={project["raised"]}
                 target={project["target"]}
+                donorID={props.donorID}
               />
             </div>
             )

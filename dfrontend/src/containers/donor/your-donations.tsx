@@ -8,20 +8,23 @@ import { getDatabase, ref, onValue} from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./../../firebase";
 
-const YourDonations = () => {
+interface yourDonationProps {
+  donorID: number
+}
 
-  const [user, loading, error] = useAuthState(auth);
+const YourDonations = (props:yourDonationProps) => {
+
   const [projects, setProjects] = useState([""]);
   const [queried, setQueried] = useState(false);
 
-  if ( !queried && user ) {
+  if ( !queried ) {
 
     const db = getDatabase();
     const donorProjectRef = ref(db, 'DonorProject');
 
     onValue(donorProjectRef, (snapshot) => {
       const data = snapshot.val();
-      const userProjects = data.filter( (data:any) => (data.donor_id === user.uid));
+      const userProjects = data.filter( (data:any) => (data.donor_id == props.donorID));
       const projectIds = new Set(userProjects.map( (item:any) => item.project_id));
       const projectRef = ref(db, 'Project');
       onValue(projectRef, (snapshot) => {
@@ -62,6 +65,7 @@ const YourDonations = () => {
                   description={project["description"]}
                   raised={project["raised"]}
                   target={project["target"]}
+                  donorID={props.donorID}
                 />
               </div>
             )

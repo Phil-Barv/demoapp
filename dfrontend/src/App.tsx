@@ -41,11 +41,11 @@ const App = () => {
     <Routes>
       <Route path="/login" element={<Login/>}> </Route>
       <Route path="/register" element={<Register/>}> </Route>
-      <Route path="/edit-profile" element={<DonorView view={<EditProfile />}/>}> </Route>
-      <Route path="/my-profile" element={<DonorView view={<YourDonations />}/>}> </Route>
-      <Route path="/browse" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
-      <Route path="/" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
-      <Route path="*" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
+      <Route path="/edit-profile" element={<DonorView view="edit_profile" />}> </Route>
+      <Route path="/my-profile" element={<DonorView view="your_donations" />}> </Route>
+      <Route path="/browse" element={<DonorView view="project_browser" />}> </Route>
+      <Route path="/" element={<DonorView view="project_browser" />}> </Route>
+      <Route path="*" element={<DonorView view="project_browser" />}> </Route>
     </Routes>
   )
 }

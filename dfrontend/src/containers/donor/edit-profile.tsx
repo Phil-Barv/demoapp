@@ -8,8 +8,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./../../firebase";
 
+interface editProfileProps{
+  donorID: number
+}
 
-const EditProfile = () => {
+const EditProfile = (props:editProfileProps) => {
 
   const [user, loading, error] = useAuthState(auth);
 
