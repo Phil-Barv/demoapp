@@ -14,11 +14,12 @@ class User(db.Model):
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     org_name= db.Column(db.String())
-    project_id = db.Column(db.Integer(),unique = True)
     project_title = db.Column(db.String())
     project_decsription = db.Column(db.String())
     target_amount = db.Column(db.Integer())
     currently_raised = db.Column(db.Integer())
+    project_id = db.Column(db.Integer, db.ForeignKey('user.id'),
+        nullable=False)
  
 
     def __repr__(self):
