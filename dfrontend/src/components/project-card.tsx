@@ -16,10 +16,12 @@ interface ProjectData {
 
 export default function ProjectCard(props: ProjectData) {
 
+  
+
   return (
     <Card sx={{ maxWidth: 345 }}>
+
       <CardHeader
-        
         action={
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
@@ -29,9 +31,6 @@ export default function ProjectCard(props: ProjectData) {
       />
 
       <CardContent>
-        <Typography variant="h5">
-          {props.name}
-        </Typography>
         <Typography variant="body2" color="text.secondary">
           {props.description}
         </Typography>

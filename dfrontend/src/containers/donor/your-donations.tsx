@@ -1,17 +1,38 @@
 import React, { useState } from 'react';
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Fab from "@mui/material/Fab";
-import TextField from '@mui/material/TextField';
-import EditIcon from '@mui/icons-material/Edit';
 
 import ProjectCard from '../../components/project-card';
-import { autocompleteClasses } from '@mui/material';
+import { getDatabase, ref, onValue} from "firebase/database";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./../../firebase";
 
 const YourDonations = () => {
 
+  const [user, loading, error] = useAuthState(auth);
+  const [projects, setProjects] = useState([""]);
+  const [queried, setQueried] = useState(false);
+
+  if ( !queried && user ) {
+
+    const db = getDatabase();
+    const donorProjectRef = ref(db, 'DonorProject');
+
+    onValue(donorProjectRef, (snapshot) => {
+      const data = snapshot.val();
+      const userProjects = data.filter( (data:any) => (data.donor_id === user.uid));
+      const projectIds = new Set(userProjects.map( (item:any) => item.project_id));
+      const projectRef = ref(db, 'Project');
+      onValue(projectRef, (snapshot) => {
+        const data = snapshot.val();
+        const projects = data.filter( (data:any) => (projectIds.has(data.pk)));
+        setProjects(projects);
+      });
+    });
+    setQueried(true);
+  }
+  
   return (
     <Stack spacing={2} height="80vh">
         <Stack direction="row" spacing={3} alignItems="center">
@@ -30,8 +51,22 @@ const YourDonations = () => {
         <Stack>
         </Stack>
         <div>
-        <Typography variant="h4" component="h2">Projects You Donated To</Typography>
-        <div>dfsa</div>
+        <Typography variant="h4" component="h2">Projects You Liked</Typography>
+        <Stack direction="row">
+          {projects.map(((project:any, index:number) => {
+            return(
+              <div key={index}>
+                <ProjectCard
+                  pk={project["pk"]}
+                  name={project["name"]}
+                  description={project["description"]}
+                  raised={project["raised"]}
+                  target={project["target"]}
+                />
+              </div>
+            )
+          } ))}
+        </Stack>
         </div>
     </Stack>
 
