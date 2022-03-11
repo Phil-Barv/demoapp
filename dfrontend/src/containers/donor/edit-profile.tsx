@@ -12,9 +12,6 @@ import { auth } from "./../../firebase";
 const EditProfile = () => {
 
   const [user, loading, error] = useAuthState(auth);
-  if (user){
-    console.log(user.uid);
-  }
 
   return (
     <Stack spacing={2} height="80vh">
