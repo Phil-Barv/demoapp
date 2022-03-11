@@ -101,6 +101,7 @@ export {
   app,
   auth,
   db,
+  firebaseConfig,
   signInWithGoogle,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,

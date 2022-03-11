@@ -42,8 +42,9 @@ const App2 = () => {
       <Route path="/login" element={<Login/>}> </Route>
       <Route path="/register" element={<Register/>}> </Route>
       <Route path="/edit-profile" element={<DonorView view={<EditProfile />}/>}> </Route>
-      <Route path="/" element={<DonorView view={<YourDonations />}/>}> </Route>
+      <Route path="/my-profile" element={<DonorView view={<YourDonations />}/>}> </Route>
       <Route path="/browse" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
+      <Route path="/" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
       <Route path="*" element={<DonorView view={<ProjectBrowser />}/>}> </Route>
     </Routes>
   )

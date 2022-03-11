@@ -34,7 +34,7 @@ function DonorView(props:DonorViewProps) {
     navigate("/edit-profile")
   }
   const goToYourDonations = () => {
-    navigate("/")
+    navigate("/my-profile")
   }
 
   return (
