@@ -23,3 +23,7 @@ When you push the new branch, create a new pull request to merge with test branc
  \
 When we merge with main branch, that's when we'll see the live deployments.  \
  \
+
+ ## Live Version
+The Live Version is hosted on https://donatello-a5e2e.firebaseapp.com/. \
+However, given we are only testing locally and not ready to rest publically, we have disabled database acccess from people without the local environment variables.
