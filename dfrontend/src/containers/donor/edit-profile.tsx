@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Fab from "@mui/material/Fab";
 import TextField from '@mui/material/TextField';
 import EditIcon from '@mui/icons-material/Edit';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./../firebase";
+
 
 const EditProfile = () => {
+  
+  const [user, loading, error] = useAuthState(auth);
 
   return (
     <Stack spacing={2} height="80vh">

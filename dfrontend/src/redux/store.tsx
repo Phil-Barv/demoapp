@@ -3,9 +3,10 @@ import { initializeApp } from "firebase/app";
 import { createStore, combineReducers  } from 'redux'
 import { firebaseReducer } from 'react-redux-firebase'
 import { firestoreReducer } from 'redux-firestore';
+import { firebaseConfig } from './../firebase';
 
 // Initialize firebase instance
-const app = initializeApp(fbConfig)
+const app = initializeApp(firebaseConfig)
 getFirestore(app);
 
 // Add firebase to reducers

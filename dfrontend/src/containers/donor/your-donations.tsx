@@ -31,15 +31,7 @@ const YourDonations = () => {
         </Stack>
         <div>
         <Typography variant="h4" component="h2">Projects You Donated To</Typography>
-        <Stack>
-        <ProjectCard
-            id={21}
-            name={"Project Name"}
-            tags={["Gender","Recommended For You"]}
-            image_path={process.env.PUBLIC_URL + "/assets/dummy_media/landfill.png"}
-            description={"Help us manage the landfills in Somalia."}
-            />
-        </Stack>
+        <div>dfsa</div>
         </div>
     </Stack>
 

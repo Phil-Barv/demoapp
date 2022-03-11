@@ -6,15 +6,22 @@ import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import ProjectCard from '../../components/project-card';
-import { useSelector } from "react-redux";
-
+import { getDatabase, ref, onValue} from "firebase/database";
 
 const ProjectBrowser = () => {
 
   const [projects, setProjects] = useState([""]);
-  const post = useSelector((state:any) =>{
-    console.log(state);}
-  );
+  const [queried, setQueried] = useState(false);
+
+  if (!queried){
+    const db = getDatabase();
+    const starCountRef = ref(db, 'Project');
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      setProjects(data);
+    });
+    setQueried(true);
+  }
   
   return (
     <div>
@@ -32,11 +39,11 @@ const ProjectBrowser = () => {
             return(
               <div key={i}>
               <ProjectCard
-                id={21}
-                name={"Project Name"}
-                tags={["Gender","Recommended For You"]}
-                image_path={process.env.PUBLIC_URL + "/assets/dummy_media/landfill.png"}
-                description={"Help us manage the landfills in Somalia."}
+                pk={project["pk"]}
+                name={project["name"]}
+                description={project["description"]}
+                raised={project["raised"]}
+                target={project["target"]}
               />
             </div>
             )
@@ -45,9 +52,7 @@ const ProjectBrowser = () => {
         </Stack>
         </Stack>
     </div>
-
   )
-  
 }
 
 export default ProjectBrowser;
