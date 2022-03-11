@@ -14,11 +14,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 interface ProjectData {
-  id: number;
-  name: string;
-  tags: string[];
-  image_path: string;
-  description: string
+  pk: number,
+  name: string,
+  description: string,
+  raised: number,
+  target: number
 }
 
 export default function ProjectCard(props: ProjectData) {
@@ -34,15 +34,16 @@ export default function ProjectCard(props: ProjectData) {
         }
         title={props.name}
       />
-      <CardMedia
-        component="img"
-        height="194"
-        image={props.image_path}
-        alt={props.image_path}
-      />
+
       <CardContent>
+        <Typography variant="h5">
+          {props.name}
+        </Typography>
         <Typography variant="body2" color="text.secondary">
           {props.description}
+        </Typography>
+        <Typography>
+          Raised {props.raised} of {props.target} needed
         </Typography>
       </CardContent>
 
