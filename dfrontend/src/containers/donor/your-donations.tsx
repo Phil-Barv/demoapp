@@ -54,8 +54,8 @@ const YourDonations = (props:yourDonationProps) => {
         <Stack>
         </Stack>
         <div>
-        <Typography variant="h4" component="h2">Projects You Liked</Typography>
-        <Stack direction="row">
+        <Typography variant="h4" component="h2" mb={3}>Projects You Liked</Typography>
+        <Stack direction="row" spacing={3}>
           {projects.map(((project:any, index:number) => {
             return(
               <div key={index}>

@@ -1,0 +1,15 @@
+.default-cover-gradient{
+    background-color: #85FFBD;
+    background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+    width:90%;
+    border-radius:18px;
+    height:300px;
+    margin-top:20px;
+    margin:10px auto;
+    box-shadow:none;
+}
+
+.default-cover-text{
+ box-sizing:border-box;
+ border-radius:18px;
+}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
+import Stack from '@mui/material/Stack';
+import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -9,6 +8,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { getDatabase, get, ref, set, child, push, update, onValue } from 'firebase/database';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./../firebase";
+
+import "./project-card.css"
 
 interface ProjectData {
   pk: number,
@@ -49,26 +50,29 @@ export default function ProjectCard(props: ProjectData) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Paper sx={{ maxWidth: 345, borderRadius:6, padding:0.3}}>
 
-      <CardHeader
-        action={
-          <IconButton aria-label="add to favorites" onClick={likeProject}>
-            {(donorProject && donorProject.liked) ? <FavoriteIcon sx={{color:"red"}} /> : <FavoriteIcon /> }
-          </IconButton>
-        }
-        title={props.name}
-      />
-
-      <CardContent>
+      <Paper className="default-cover-gradient" sx={{borderRadius:4}}>
+      <Stack className="default-cover-text" height="100%" justifyContent="end" spacing={1} padding={1}>
+        <Typography variant="h5" color="text.secondary">
+          {props.name}
+          </Typography>
         <Typography variant="body2" color="text.secondary">
           {props.description}
         </Typography>
-        <Typography>
+        </Stack>
+      </Paper>
+  
+        <Stack alignItems="center" justifyContent="space-between">
+        <Typography mt={1} mb={1} sx={{textAlign:"center"}}>
           {(props.raised/props.target*100).toFixed(0)}% raised. ${props.target-props.raised} more to go.
         </Typography>
-      </CardContent>
 
-    </Card>
+        <IconButton aria-label="add to favorites" onClick={likeProject}>
+            {(donorProject && donorProject.liked) ? <FavoriteIcon sx={{color:"red"}} /> : <FavoriteIcon /> }
+        </IconButton>
+        </Stack>
+
+    </Paper>
   );
 }

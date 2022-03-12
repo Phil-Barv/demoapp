@@ -33,14 +33,8 @@ const ProjectBrowser = (props: browseProjectsProps) => {
     <div>
         <Stack spacing={2}>
         <Typography variant="h3">Find Meaningful Projects</Typography>
-        <Typography>Explore some of the most recent projects coming from well-meaning charities.</Typography>
-        <Paper component="form">
-          <IconButton type="submit" aria-label="search">
-            <SearchIcon />
-          </IconButton>
-          <InputBase type="text" placeholder="search inspiring projects"/>
-        </Paper>
-        <Stack direction="row">
+        <Typography variant="h4">Popular Near You</Typography>
+        <Stack direction="row" spacing={3}>
           {projects.map((project:any,i:number) => {
             return(
               <div key={i}>
@@ -57,6 +51,12 @@ const ProjectBrowser = (props: browseProjectsProps) => {
           })
           }
         </Stack>
+        <Paper component="form" sx={{borderRadius:4}}>
+          <IconButton type="submit" aria-label="search" disabled>
+            <SearchIcon />
+          </IconButton>
+          <InputBase type="text" placeholder="search inspiring projects" disabled/>
+        </Paper>
         </Stack>
     </div>
   )
