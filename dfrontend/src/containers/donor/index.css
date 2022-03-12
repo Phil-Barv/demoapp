@@ -1,0 +1,32 @@
+#donor-dashboard-header{
+    background-color:#FFFFFF;
+    width:100vw;
+    margin:0px;
+    color:black;
+    font-size:9px;
+    padding:4px 12px;
+}
+
+#donor-dashboard-sidebar{
+    margin-top:3vh;
+    padding:0px 10px;
+    margin-bottom:3vh;
+    height:94vh;
+}
+
+#donor-dashboard-body{
+    padding:20px;
+    margin-top:3vh;
+    margin-bottom:3vh;
+    height:94vh;
+    margin-right:20px;
+    border-radius:9px;
+    background-color:#F7F8FA;
+}
+
+#app-title{
+    margin-top:auto;
+    color:#5F5F5F;
+    width:100%;
+    text-align:center;
+}

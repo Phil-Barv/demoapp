@@ -25,6 +25,7 @@ import ProjectBrowser from './browse-projects';
 import YourDonations from './your-donations';
 import EditProfile from './edit-profile';
 
+import "./index.css"
 
 interface DonorViewProps {
   view: string
@@ -72,39 +73,29 @@ function DonorView(props:DonorViewProps) {
 
   return (
       <Stack>
-        <Container sx={{backgroundColor:"black",color:"white",width:"100vw"}}>
-          <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              donatello
-            </Typography>
-            </Container>
-        <Stack direction="row">
-          <Stack>
-          <List component="nav">
-          <React.Fragment>
-    <ListItemButton onClick={goToBrowse}>
-      <ListItemIcon>
-        <DashboardOutlinedIcon />
-      </ListItemIcon>
-      <ListItemText primary="Browse Projects" />
-    </ListItemButton>
-    <ListItemButton onClick={goToYourDonations}>
-      <ListItemIcon>
-        <FavoriteBorderOutlinedIcon />
-      </ListItemIcon>
-      <ListItemText primary="Your Donations" />
-    </ListItemButton>
-    <ListItemButton onClick={goToEditProfile}>
-      <ListItemIcon>
-        <PermIdentityOutlinedIcon />
-      </ListItemIcon>
-      <ListItemText primary="Profile Settings" />
-    </ListItemButton>
+        
+    <Stack direction="row">
+      <Stack id="donor-dashboard-sidebar">
+        <List component="nav">
+        <React.Fragment>
+      <ListItemButton onClick={goToBrowse}>
+        <ListItemIcon>
+          <DashboardOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Browse Projects" />
+      </ListItemButton>
+      <ListItemButton onClick={goToYourDonations}>
+        <ListItemIcon>
+          <FavoriteBorderOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Your Donations" />
+      </ListItemButton>
+      <ListItemButton onClick={goToEditProfile}>
+        <ListItemIcon>
+          <PermIdentityOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Profile Settings" />
+      </ListItemButton>
     
   </React.Fragment>
             <Divider sx={{ my: 1 }} />
@@ -116,11 +107,13 @@ function DonorView(props:DonorViewProps) {
       </ListItemIcon>
       <ListItemText primary="Log Out" />
     </ListItemButton>
-
   </React.Fragment>
-          </List>
+      </List>
+      <Typography component="h1" id="app-title">
+          donatello
+        </Typography>
     </Stack>
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container id="donor-dashboard-body">
           {renderView()}
           </Container>
         </Stack>
