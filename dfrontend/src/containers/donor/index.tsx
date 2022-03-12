@@ -13,7 +13,6 @@ import ListItemText from '@mui/material/ListItemText';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 import { logout } from "src/firebase";
@@ -111,12 +110,6 @@ function DonorView(props:DonorViewProps) {
             <Divider sx={{ my: 1 }} />
             <React.Fragment>
 
-    <ListItemButton>
-      <ListItemIcon>
-        <HelpOutlineOutlinedIcon />
-      </ListItemIcon>
-      <ListItemText primary="Help" />
-    </ListItemButton>
     <ListItemButton onClick={logout}>
       <ListItemIcon>
         <LogoutOutlinedIcon />
