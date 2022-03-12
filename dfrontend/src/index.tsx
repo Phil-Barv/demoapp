@@ -25,7 +25,7 @@ class ErrorBoundary extends React.Component {
   render() {
     return this.props.children; 
   }
-}
+};
 
 const AppWrapper = () => {
 
@@ -42,6 +42,9 @@ const AppWrapper = () => {
   )
 }
 
+
 ReactDOM.render( <AppWrapper />, document.getElementById('root') );
 
 reportWebVitals();
+
+export default AppWrapper;

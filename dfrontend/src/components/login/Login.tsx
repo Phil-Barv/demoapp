@@ -4,6 +4,7 @@ import { auth, logInWithEmailAndPassword, signInWithGoogle } from "src/firebase"
 import { useAuthState } from "react-firebase-hooks/auth";
 import Stack from "@mui/material/Stack"
 import "./Login.css";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
