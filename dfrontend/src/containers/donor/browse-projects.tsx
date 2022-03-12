@@ -32,8 +32,8 @@ const ProjectBrowser = (props: browseProjectsProps) => {
   return (
     <div>
         <Stack spacing={2}>
-        <Typography variant="h1">HELLO</Typography>
-        <Typography>Here are the community's most recent projects.</Typography>
+        <Typography variant="h3">From The Community</Typography>
+        <Typography>Explore some of the most recent projects coming from well-meaning charities.</Typography>
         <Paper component="form">
           <IconButton type="submit" aria-label="search">
             <SearchIcon />
