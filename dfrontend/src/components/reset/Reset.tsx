@@ -1,3 +1,7 @@
+/* Reset DOM elements that call the firebase document defined in src/firebase.tsx
+Source: https://blog.logrocket.com/user-authentication-firebase-react-apps/
+*/
+
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";

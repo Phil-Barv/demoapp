@@ -1,3 +1,5 @@
+/* Placeholder for charity's public profile view */
+
 import React, { useState } from 'react';
 
 const CharityPublic = () => {

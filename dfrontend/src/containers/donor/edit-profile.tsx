@@ -1,20 +1,20 @@
+/* Page for users to edit their profile.
+Currently, we only list their display name and user email.
+*/
+
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Fab from "@mui/material/Fab";
-import TextField from '@mui/material/TextField';
-import EditIcon from '@mui/icons-material/Edit';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./../../firebase";
 
+interface editProfileProps{
+  donorID: number
+}
 
-const EditProfile = () => {
+const EditProfile = (props:editProfileProps) => {
 
   const [user, loading, error] = useAuthState(auth);
-  if (user){
-    console.log(user.uid);
-  }
 
   return (
     <Stack spacing={2} height="80vh">

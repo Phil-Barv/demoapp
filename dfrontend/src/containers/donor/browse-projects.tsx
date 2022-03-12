@@ -1,3 +1,10 @@
+/* Page where users can browse projects
+  In this page, we fetch the current projects from firebase
+  and iterate through them using .map. Like a for loop, 
+  everytime we iterate through one project, we render a card for the project
+  and pass the project props into the project components.
+ */
+
 import React, { useState, useEffect } from 'react';
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -8,7 +15,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import ProjectCard from '../../components/project-card';
 import { getDatabase, ref, onValue} from "firebase/database";
 
-const ProjectBrowser = () => {
+
+interface browseProjectsProps{
+  donorID: number
+}
+
+
+const ProjectBrowser = (props: browseProjectsProps) => {
 
   const [projects, setProjects] = useState([""]);
   const [queried, setQueried] = useState(false);
@@ -26,15 +39,9 @@ const ProjectBrowser = () => {
   return (
     <div>
         <Stack spacing={2}>
-        <Typography variant="h1">HELLO</Typography>
-        <Typography>Here are the community's most recent projects.</Typography>
-        <Paper component="form">
-          <IconButton type="submit" aria-label="search">
-            <SearchIcon />
-          </IconButton>
-          <InputBase type="text" placeholder="search inspiring projects"/>
-        </Paper>
-        <Stack direction="row">
+        <Typography variant="h3">Find Meaningful Projects</Typography>
+        <Typography variant="h4">Popular Near You</Typography>
+        <Stack direction="row" spacing={3}>
           {projects.map((project:any,i:number) => {
             return(
               <div key={i}>
@@ -44,12 +51,19 @@ const ProjectBrowser = () => {
                 description={project["description"]}
                 raised={project["raised"]}
                 target={project["target"]}
+                donorID={props.donorID}
               />
             </div>
             )
           })
           }
         </Stack>
+        <Paper component="form" sx={{borderRadius:4}}>
+          <IconButton type="submit" aria-label="search" disabled>
+            <SearchIcon />
+          </IconButton>
+          <InputBase type="text" placeholder="search inspiring projects" disabled/>
+        </Paper>
         </Stack>
     </div>
   )

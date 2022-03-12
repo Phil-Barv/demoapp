@@ -1,17 +1,45 @@
+/* Page to load the user's donations. Here we fetch from the database all available projects
+and compare whether the donor ID of the user has a relationship with the project
+that is stored in the DonorProject endpoint. If we find this relationship, then we use it to display the given project.
+The relationship can get created when a user donates or interacts with the project by liking/unliking it.
+*/
+
 import React, { useState } from 'react';
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Fab from "@mui/material/Fab";
-import TextField from '@mui/material/TextField';
-import EditIcon from '@mui/icons-material/Edit';
 
 import ProjectCard from '../../components/project-card';
-import { autocompleteClasses } from '@mui/material';
+import { getDatabase, ref, onValue} from "firebase/database";
 
-const YourDonations = () => {
+interface yourDonationProps {
+  donorID: number
+}
 
+const YourDonations = (props:yourDonationProps) => {
+
+  const [projects, setProjects] = useState([""]);
+  const [queried, setQueried] = useState(false);
+
+  if ( !queried ) {
+
+    const db = getDatabase();
+    const donorProjectRef = ref(db, 'DonorProject');
+
+    onValue(donorProjectRef, (snapshot) => {
+      const data = snapshot.val();
+      const userProjects = data.filter( (data:any) => (data.donor_id == props.donorID));
+      const projectIds = new Set(userProjects.map( (item:any) => item.project_id));
+      const projectRef = ref(db, 'Project');
+      onValue(projectRef, (snapshot) => {
+        const data = snapshot.val();
+        const projects = data.filter( (data:any) => (projectIds.has(data.pk)));
+        setProjects(projects);
+      });
+    });
+    setQueried(true);
+  }
+  
   return (
     <Stack spacing={2} height="80vh">
         <Stack direction="row" spacing={3} alignItems="center">
@@ -30,8 +58,23 @@ const YourDonations = () => {
         <Stack>
         </Stack>
         <div>
-        <Typography variant="h4" component="h2">Projects You Donated To</Typography>
-        <div>dfsa</div>
+        <Typography variant="h4" component="h2" mb={3}>Projects You Liked</Typography>
+        <Stack direction="row" spacing={3}>
+          {projects.map(((project:any, index:number) => {
+            return(
+              <div key={index}>
+                <ProjectCard
+                  pk={project["pk"]}
+                  name={project["name"]}
+                  description={project["description"]}
+                  raised={project["raised"]}
+                  target={project["target"]}
+                  donorID={props.donorID}
+                />
+              </div>
+            )
+          } ))}
+        </Stack>
         </div>
     </Stack>
 

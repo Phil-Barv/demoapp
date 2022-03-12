@@ -23,3 +23,12 @@ When you push the new branch, create a new pull request to merge with test branc
  \
 When we merge with main branch, that's when we'll see the live deployments.  \
  \
+
+**Running Tests**
+Please keep running tests after your changes and before committing to the repo. \
+To run the test suite we use Jest. You should run \
+"npm run test" and then press "a" \
+
+ ## Live Version
+The Live Version is hosted on https://donatello-a5e2e.firebaseapp.com/. \
+However, given we are only testing locally and not ready to rest publically, we have disabled database acccess from people without the local environment variables.
