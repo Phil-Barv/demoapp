@@ -52,7 +52,7 @@ export default function ProjectCard(props: ProjectData) {
           {props.description}
         </Typography>
         <Typography>
-          Raised {props.raised} of {props.target} needed
+          {(props.raised/props.target*100).toFixed(0)}% raised. ${props.target-props.raised} more to go.
         </Typography>
       </CardContent>
 
