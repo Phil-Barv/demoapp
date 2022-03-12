@@ -1,3 +1,5 @@
+/* Placeholder for project's public profile view */
+
 import React, { useState } from 'react';
 
 const ProjectPublic = () => {

@@ -1,3 +1,10 @@
+/* Page where users can browse projects
+  In this page, we fetch the current projects from firebase
+  and iterate through them using .map. Like a for loop, 
+  everytime we iterate through one project, we render a card for the project
+  and pass the project props into the project components.
+ */
+
 import React, { useState, useEffect } from 'react';
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";

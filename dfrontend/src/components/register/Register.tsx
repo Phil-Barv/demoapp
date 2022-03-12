@@ -1,3 +1,9 @@
+/* Registration page for our app.
+As with the login page, we use this page to construct the form
+The actions that we trigger are defined within the fireabse file in src/firebase.tsx
+Source: https://blog.logrocket.com/user-authentication-firebase-react-apps/
+*/ 
+
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";

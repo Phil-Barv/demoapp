@@ -1,3 +1,5 @@
+/* Current placeholder for a search bar that will allow users to search available projects*/
+
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 

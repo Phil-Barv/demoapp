@@ -1,3 +1,9 @@
+/* Login Page 
+We use the page to construct the dom elements used at login.
+The elemets call the actions that appear in our firebase actions files.
+Source: https://blog.logrocket.com/user-authentication-firebase-react-apps/
+*/
+
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "src/firebase";
@@ -12,7 +18,6 @@ function Login() {
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) {
-      // maybe trigger a loading screen
       return;
     }
     if (user) {navigate('/')};

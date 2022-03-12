@@ -1,3 +1,10 @@
+/* Entry into our app.
+We wrap our app into three components:
+Provider: allows us to reference the store/database within our react components
+ErrorBoundary: allows us to console.log() the errors that appear within the components.
+BroswerRouter: so we can use the router given the state of our app's url
+*/
+
 import React, { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 import App from './App';

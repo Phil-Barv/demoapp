@@ -1,3 +1,11 @@
+/* Main Interface for the donors
+After importing required components, we create a sidebar and "donor-dashboard-body"
+We use the sidebar for the user to navigate and load the relevant components like
+browse projects, userinformation, and my projects. We've tested this navigation within tests.
+We also define a function called createDonor() that gets called when the user does not have a donor profile.
+If they do not have a donor profile, we create one for them by sending a post request to our firebase endpoint.
+*/
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
@@ -40,7 +48,6 @@ function DonorView(props:DonorViewProps) {
 
   const createDonor = () => {
 
-    // Get a key for a new Post.
     const newPostKey = push(child(ref(db), 'posts')).key;
 
     const uid = user ? user.uid : "DEFAULTUSERID";

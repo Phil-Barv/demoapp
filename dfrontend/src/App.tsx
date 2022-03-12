@@ -1,3 +1,9 @@
+/* Main router for the app
+  Besides routing the user depending on the url that gets navigated to,
+  We also check if the user exists. If the user has an uid, then we allow him to access the app.
+  However, if he does not, then we redirect him/her/they to the login page.
+*/
+
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "./firebase";
@@ -6,9 +12,6 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import DonorView from './containers/donor';
-import ProjectBrowser from './containers/donor/browse-projects';
-import YourDonations from './containers/donor/your-donations';
-import EditProfile from './containers/donor/edit-profile';
 
 import Login from './components/login/Login';
 import Register from './components/register/Register';

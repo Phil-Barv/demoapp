@@ -1,3 +1,9 @@
+/* Page to load the user's donations. Here we fetch from the database all available projects
+and compare whether the donor ID of the user has a relationship with the project
+that is stored in the DonorProject endpoint. If we find this relationship, then we use it to display the given project.
+The relationship can get created when a user donates or interacts with the project by liking/unliking it.
+*/
+
 import React, { useState } from 'react';
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -5,8 +11,6 @@ import Typography from "@mui/material/Typography";
 
 import ProjectCard from '../../components/project-card';
 import { getDatabase, ref, onValue} from "firebase/database";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "./../../firebase";
 
 interface yourDonationProps {
   donorID: number

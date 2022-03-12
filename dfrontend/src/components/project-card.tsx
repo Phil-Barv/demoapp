@@ -1,3 +1,9 @@
+/* Project Card Component where we store the title, description, and total amount raised.
+Currently, we also check whether the donor has liked the project by fetching from firebase
+using their donorID and the projectID as a composite key for the donor-project relationship.
+we use interfaces like ProjectData as part of typescript to define what we pass into our functions with more clarity.
+*/
+
 import React, { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
@@ -6,8 +12,6 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { getDatabase, get, ref, set, child, push, update, onValue } from 'firebase/database';
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "./../firebase";
 
 import "./project-card.css"
 

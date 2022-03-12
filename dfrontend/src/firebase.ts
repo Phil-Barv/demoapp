@@ -1,3 +1,5 @@
+/* Main configuration for firebase */
+
 import {
   getFirestore,
   query,

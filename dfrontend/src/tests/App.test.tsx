@@ -1,12 +1,12 @@
+/* Initial tests for navigating through the frontend 
+and computing the percentage of a project's current account. */
+
 import React from 'react';
-import { debug } from 'console';
 import {cleanup, fireEvent, getDefaultNormalizer, render, screen} from '@testing-library/react';
-import renderer from 'react-test-renderer';
 import App from './../App';
 import { BrowserRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import ProjectCard from './../components/project-card';
-
 
 
 test('make the sidebar navigatable to project browsing', () => {
@@ -57,14 +57,3 @@ test('check that the remaining money for project is accurately calculated', () =
   })
   expect(headingElement).toBeInTheDocument();
 });
-
-/*
-Tests to run:
-
-
-ensure title of the webpage is h1
-Test user login authentication
-Test button loading sending you to correct pages
-Test percentage on project calculated well in range between 0-100%
-
-*/
