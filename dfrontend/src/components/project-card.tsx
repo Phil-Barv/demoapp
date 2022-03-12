@@ -36,6 +36,8 @@ export default function ProjectCard(props: ProjectData) {
         project_id: donorProject.project_id
       });
   }
+
+
 };
 
   if (!triggered && props.pk && props.donorID > -1 ){

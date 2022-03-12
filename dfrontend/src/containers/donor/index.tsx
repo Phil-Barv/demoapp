@@ -38,13 +38,40 @@ function DonorView(props:DonorViewProps) {
   const [donorID, setDonorID] = useState(-10);
   const [triggered, setTriggered] = useState(false);
 
+  const createDonor = () => {
+
+    // Get a key for a new Post.
+    const newPostKey = push(child(ref(db), 'posts')).key;
+
+    const uid = user ? user.uid : "DEFAULTUSERID";
+
+    const donorData = {
+      pk: newPostKey,
+      uid: uid
+    };
+
+    interface updateDict {
+      [key: string]: any;
+    };
+
+    const updates : updateDict = {};
+
+    updates['/Donor/'.concat( (typeof newPostKey == 'string') ? newPostKey : "null" )]=donorData;
+
+    return update(ref(db), updates);
+  }
+
   if (!triggered && user){
     setTriggered(true);
     const getDonorRef = ref(db, 'Donor');
     onValue(getDonorRef, (snapshot:any) => {
       const data = snapshot.val();
-      data.filter((data:any) => (data.uid==user.uid)) ;
-      setDonorID(data[0].pk);
+      const filteredData = data.filter((data:any) => (data.uid==user.uid)) ;
+      if (filteredData.length>0){
+        setDonorID(filteredData[0].pk);
+      }else{
+        createDonor();
+      };
     });
   };
 
