@@ -12,6 +12,7 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import DonorView from './containers/donor';
+
 import Login from './components/login/Login';
 import Button from './components/button/button';
 import Register from './components/register/Register';
@@ -51,7 +52,7 @@ const App = () => {
       <Route path="/browse" element={<DonorView view="project_browser" />}> </Route>
       <Route path="/" element={<DonorView view="project_browser" />}> </Route>
       <Route path="*" element={<DonorView view="project_browser" />}> </Route>
-      <Route path="/individual-project" element={<DonorView view="individual_project_page" />}> </Route>
+      <Route path="/individual-project-page" element={<DonorView view="individual_project_page" />}></Route>
       
     </Routes>
   )

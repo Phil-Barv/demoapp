@@ -32,6 +32,7 @@ import { auth } from "./../../firebase";
 import ProjectBrowser from './browse-projects';
 import YourDonations from './your-donations';
 import EditProfile from './edit-profile';
+import IndividualProjectPage from "./individual-project-page";
 
 import "./index.css"
 
@@ -92,6 +93,9 @@ function DonorView(props:DonorViewProps) {
   const goToYourDonations = () => {
     navigate("/my-profile")
   }
+  const goToIndividualProjectPage = () => {
+    navigate('/individual-project-page')
+  }
 
   const renderView = () => {
     switch(props.view){
@@ -101,12 +105,13 @@ function DonorView(props:DonorViewProps) {
         return <YourDonations donorID={donorID} />
       case "edit_profile":
         return<EditProfile donorID={donorID} />
+        case "individual_project_page":
+          return<IndividualProjectPage donorID={donorID} />
     }
   }
 
-
   return (
-      <Stack>
+    <Stack>
         
     <Stack direction="row">
       <Stack id="donor-dashboard-sidebar">
