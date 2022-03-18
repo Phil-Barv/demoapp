@@ -8,7 +8,6 @@ import React, { useState } from 'react';
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
 import ProjectCard from '../../components/project-card';
 import { getDatabase, ref, onValue} from "firebase/database";
 
