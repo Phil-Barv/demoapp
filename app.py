@@ -1,22 +1,5 @@
-from flask import Flask, send_from_directory
-from flask_cors import CORS, cross_origin
-
-app = Flask(__name__, static_folder='./frontend/build', static_url_path='/')
-
-CORS(app)
-
-
-@app.route('/api', methods=['GET'])
-@cross_origin()
-def index():
-    return {
-        "tutorial": "Flask React Heroku"
-    }
-
-@app.route('/')
-@cross_origin()
-def serve():
-    return send_from_directory(app.static_folder, 'index.html')
+from backend import app, db
 
 if __name__ == "__main__":
+    db.create_all()
     app.run()  
