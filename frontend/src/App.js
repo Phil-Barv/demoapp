@@ -1,6 +1,7 @@
 import './App.css';
 import {useState, useEffect} from 'react';
-import {Deploy} from './Component/Deploy/Deploy';
+import {Deploy} from './components/home/home';
+
 function App() {
 
   const [state, setState] = useState({})
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <Deploy prop={state}/>
+      <Deploy response={state}/>
     </div> 
   );
 }
