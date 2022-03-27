@@ -1,6 +1,6 @@
 import './App.css';
 import {useState, useEffect} from 'react';
-import {Deploy} from './components/home/home';
+import Home from './components/home/home';
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <Deploy response={state}/>
+      <Home response={state}/>
     </div> 
   );
 }
