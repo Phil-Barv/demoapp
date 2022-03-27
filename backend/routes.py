@@ -1,10 +1,15 @@
-from backend import app,db
-from flask import render_template, request, redirect
+from backend import app,db,bcrypt
+
+import json
+from datetime import datetime, timedelta, timezone
+from flask import render_template, request, redirect, jsonify
+
 from backend.models.charity import Charity
 from backend.models.donor import Donor
 from backend.models.project import Project
 from backend.forms import DonorSignUpForm, DonorLoginForm
 
+from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, unset_jwt_cookies, jwt_required
 from datetime import datetime
 
 
@@ -12,6 +17,44 @@ from datetime import datetime
 #from flask_cors import CORS, cross_origin ###for when we want to host on heroku
 
 #CORS(app)
+
+@app.after_request
+def refresh_expiring_jwts(response):
+    try:
+        exp_timestamp = get_jwt()["exp"]
+        now = datetime.now(timezone.utc)
+        target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
+        if target_timestamp > exp_timestamp:
+            access_token = create_access_token(identity=get_jwt_identity())
+            data = response.get_json()
+            if type(data) is dict:
+                data["access_token"] = access_token 
+                response.data = json.dumps(data)
+        return response
+    except (RuntimeError, KeyError):
+        # Case where there is not a valid JWT. Just return the original respone
+        return response
+
+@app.route('/token', methods=["POST"])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    donor = Donor.query.filter_by(email=email).first() 
+
+    if donor:
+        if bcrypt.check_password_hash(donor.password, password):
+            access_token = create_access_token(identity=email)
+            response = {"access_token":access_token}
+            return response
+    
+    return {"msg": "Wrong email or password"}, 401
+
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    response = jsonify({"msg": "logout successful"})
+    unset_jwt_cookies(response)
+    return response
 
 @app.route('/api', methods=['GET'])
 #@cross_origin()
@@ -31,15 +74,17 @@ def index():
 #Get all projects
 #retreiving  all projects
 @app.route('/project', methods =['GET'])
+@jwt_required()
 def getAllProjects():
     projects = Project.query.all()
-    response = [project.jsonify() for project in projects]
+    data = [project.jsonify() for project in projects]
     return {
-        "response": response
+        "response": data
     }
 
 #Get a single project - filter by project id
 @app.route('/project/<int:id>')
+@jwt_required()
 def getOneProject(id):
     project = Project.query.filter_by(id=id).first()
     if project:
@@ -168,26 +213,25 @@ def deleteProject(id):
     return { "response": 500 }
 
 
-@app.route("/signup/", methods=["POST", "GET"])
-def login():
-    form = DonorSignUpForm()
+@app.route("/register-donor", methods=["POST"])
+def register_donor():
 
-    if form.validate_on_submit():
+    #pass all the necessary  requirement
+    username= request.json.get("username", None)
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
 
-        #pass all the necessary  requirement
-        username= form['username']
-        email = form['email']
-        password = form['password']
+    #we create an instance of project class
+    donor = Donor(
+        username=username,
+        email=email,
+        password=bcrypt.generate_password_hash(password),
+        )
 
-        #we create an instance of project class
-        donor = Donor(
-            username=username,
-            email=email,
-            password=password,
-            )
+    db.session.add(donor)
+    db.session.commit()
 
-        db.session.add(donor)
-        db.session.commit()
+    return { "response": 200 }
 
 #login user
 '''

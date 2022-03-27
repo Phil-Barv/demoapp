@@ -1,24 +1,22 @@
 import {useState, useEffect} from 'react';
 import axios from "axios";
 
-function LoginPage(props){
+function DonorRegistration(props){
 
-    const [loginForm, setloginForm] = useState({
-        email: "",
-        password: ""
+    const [registerForm, setRegisterForm] = useState({
+      email: "",
+      username: "",
+      password: "",
     })
-
-    function registerInstead(){
-        props.setIsRegistered(false);
-    };
-
-    function logMeIn(event) {
+  
+    function register(event) {
         axios({
           method: "POST",
-          url:"/token",
+          url:"/register-donor",
           data:{
-            email: loginForm.email,
-            password: loginForm.password
+            email: registerForm.email,
+            username: registerForm.username,
+            password: registerForm.password
            }
         })
         .then((response) => {
@@ -31,41 +29,47 @@ function LoginPage(props){
             }
         })
   
-        setloginForm(({
+        setRegisterForm({
           email: "",
-          password: ""}))
-  
+          username: "",
+          password: "",
+        })
+
         event.preventDefault()
       }
   
       function handleChange(event) { 
         const {value, name} = event.target
-        setloginForm(prevNote => ({
+        setRegisterForm(prevNote => ({
             ...prevNote, [name]: value})
         )}
   
       return (
         <div>
-          <h1>Login</h1>
-            <form className="login">
+            <form>
               <input onChange={handleChange} 
                     type="email"
-                    text={loginForm.email} 
+                    text={registerForm.email} 
                     name="email" 
                     placeholder="Email" 
-                    value={loginForm.email} />
+                    value={registerForm.email} />
+              <input onChange={handleChange} 
+                    type="text"
+                    text={registerForm.username} 
+                    name="username" 
+                    placeholder="Username" 
+                    value={registerForm.username} />
               <input onChange={handleChange} 
                     type="password"
-                    text={loginForm.password} 
+                    text={registerForm.password} 
                     name="password" 
                     placeholder="Password" 
-                    value={loginForm.password} />
+                    value={registerForm.password} />
   
-            <button onClick={logMeIn}>Submit</button>
+            <button onClick={register}>Register</button>
           </form>
-          <button onClick={registerInstead}>Register</button>
         </div>
       );
 }
 
-export default LoginPage;
+export default DonorRegistration;

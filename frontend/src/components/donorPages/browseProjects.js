@@ -16,6 +16,9 @@
 
   import ProjectCard from '../sharedComponents/projectCard';  
   import ProjectPage from '../sharedComponents/projectPage';  
+
+  import APIService from '../api';
+
   
   const ProjectBrowser = (props) => {
   
@@ -23,16 +26,17 @@
     const [queried, setQueried] = useState(false);
     const [currentProject, setCurrentProject]  = useState(null);
   
-    useEffect(() => {
-        fetch('/project').then(response => {
-          if (response.status === 200) {
-            return response.json()
-          }
-        }).then(data => setProjects(data.response))
-        .then(error => console.log(error))
-      }, [])
 
-    
+    useEffect(() => {
+        APIService.GetProjects(props.token
+          ).then(response => {
+            if (response.status === 200) {
+              return response.data
+            }
+          }).then(data => setProjects(data.response))
+          .then(error => {if(error){console.log(error)}})
+        }, []
+    )
     
     return (
         <div>

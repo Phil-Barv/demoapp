@@ -1,43 +1,44 @@
 import {useState, useEffect} from 'react';
 
+import useToken from '../../utils/useToken'
+
 import LoginPage from './login';
+import RegisterPage from './register';
+
 import CharityDashboard from './charityDashboard';
 import DonorDashboard from './donorDashboard';
 
 function Home() {
 
-  const [userState, setUserState] = useState(0);
-  const [apiResponse, setResponse] = useState({});
+  const { token, removeToken, setToken } = useToken();
 
-  useEffect(() => {
-    fetch('/api').then(response => {
-      if (response.status === 200) {
-        return response.json()
-      }
-    }).then(data => setResponse(data))
-    .then(error => console.log(error))
-  }, [])
+  const [userState, setUserState] = useState(2);
+  const [apiResponse, setResponse] = useState({});
+  const [isRegistered, setIsRegistered ] = useState(true);
 
 const renderView = () => {
     switch(userState){
-        case 0:
-            return(<LoginPage setUserState={setUserState}/>)
         case 1:
             return(<CharityDashboard
-                      setUserState={setUserState}
+                      removeToken={removeToken}
+                      token={token}
                       response={apiResponse}/>)
         case 2:
             return(<DonorDashboard
-                      setUserState={setUserState}
+                      removeToken={removeToken}
+                      token={token}
                       response={apiResponse}/>)
-        default:
-            return(<LoginPage setUserState={setUserState}/>)
     }
   }
 
   return (
     <div>
-      {renderView()}
+      {!token && token!=="" &&token!== undefined?  
+        (isRegistered ?
+          <LoginPage setToken={setToken} setIsRegistered={setIsRegistered}/>
+          : <RegisterPage setToken={setToken} setIsRegistered={setIsRegistered}/>)
+        : renderView()
+      }
     </div> 
   );
 }

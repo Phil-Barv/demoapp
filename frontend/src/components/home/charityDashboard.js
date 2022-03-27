@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import Stack from '@mui/material/Stack';
 import List from '@mui/material/List';
@@ -22,14 +23,25 @@ function CharityDashboard(props) {
 
   const [state, setState] = useState(0);
 
-  const logout = (e) => {
-    props.setUserState(0);
-  }
+  function logout() {
+    axios({
+      method: "POST",
+      url:"/logout",
+    })
+    .then((response) => {
+       props.removeToken()
+    }).catch((error) => {
+      if (error.response) {
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+        }
+    })}
 
   const renderView = () => {
     switch(state){
       default:
-        return(<AddProjectForm />)
+        return(<AddProjectForm token={props.token}/>)
     }
   }
 

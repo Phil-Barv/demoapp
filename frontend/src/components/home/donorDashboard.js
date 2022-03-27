@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import Stack from '@mui/material/Stack';
 import List from '@mui/material/List';
@@ -24,20 +25,31 @@ function DonorDashboard(props) {
 
   const [state, setState] = useState(1);
 
-  const logout = (e) => {
-    props.setUserState(0);
-  }
+  function logout() {
+    axios({
+      method: "POST",
+      url:"/logout",
+    })
+    .then((response) => {
+       props.removeToken()
+    }).catch((error) => {
+      if (error.response) {
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+        }
+    })}
 
   const renderView = () => {
     switch(state){
         case 1:
-            return(<ProjectBrowser />)
+            return(<ProjectBrowser token={props.token}/>)
         case 2:
-            return(<YourDonations />)
+            return(<YourDonations token={props.token} />)
         case 3:
-            return(<EditProfile />)
+            return(<EditProfile token={props.token} />)
         default:
-            return(<ProjectBrowser />)
+            return(<ProjectBrowser token={props.token} />)
     }
   }
 

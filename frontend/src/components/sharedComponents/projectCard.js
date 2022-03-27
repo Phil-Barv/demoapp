@@ -9,9 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-
 import "./projectCard.css"
-
 
 export default function ProjectCard(props) {
 

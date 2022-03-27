@@ -20,7 +20,8 @@ const AddProjectForm = (props) => {
             deadline,
             targetAmount,
             raisedAmount
-        }).then((response) => console.log(response))
+        }, props.token
+        ).then((response) => console.log(response))
         .catch(error => console.log('error',error))
     }
 

@@ -9,7 +9,6 @@ import { Avatar, Grid, Button } from "@mui/material";
 
 const ProjectPage = (props) => {
 
-    console.log(props.props);
     function closeProject(e){
         props.props.setCurrentProject(null);
       }
