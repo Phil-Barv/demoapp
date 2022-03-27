@@ -115,7 +115,7 @@ def updateProject(id):
             db.session.add(project)
             db.session.commit()
             return redirect(f'/project/{id}')
-        return f" sorry project  with id = {id} Does not exist"
+        return {"response" : f"sorry project  with id = {id} Does not exist"}
  
     return render_template('update.html', project = project)
 
