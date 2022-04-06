@@ -1,0 +1,25 @@
+/* Main Styling for the dashboard interface */
+
+#dashboard-sidebar{
+    margin-top:3vh;
+    padding:0px 10px;
+    margin-bottom:3vh;
+    height:94vh;
+}
+
+#dashboard-body{
+    padding:20px;
+    margin-top:3vh;
+    margin-bottom:3vh;
+    height:94vh;
+    margin-right:20px;
+    border-radius:9px;
+    background-color:#F7F8FA;
+}
+
+#app-title{
+    margin-top:auto;
+    color:#5F5F5F;
+    width:100%;
+    text-align:center;
+}
