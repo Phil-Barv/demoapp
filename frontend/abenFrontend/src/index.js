@@ -9,6 +9,8 @@ import {
 } from 'react-router-dom'
 import SignUpCharity from './Components/SignUpCharity';
 import SignUpDonor from './Components/SignUpDonor';
+import DonorDashboard from './Components/donorDashboard';
+import CharityDashboard from './Components/charityDashboard';
 import Login from './Components/Login';
 import Home from './Components/Home';
 import {Container} from 'react-bootstrap'
@@ -21,7 +23,11 @@ function App () {
           <Container className = "d-flex align-item-center justify-content-center" style = {{minHeight:"100vh"}}>
           <div className='w-100' style = {{maxWidth: "400vh"}}>
             <Routes>
+                
+                
                 <Route exact path="/" element={<Home/>}/>
+                <Route exact path="/charitydonor" element={<DonorDashboard/>}/>
+               
                 <Route exact path="/signupdonor" element={<SignUpDonor/>}/>
                 <Route exact path="/signupcharity" element={<SignUpCharity/>}/>
                 <Route exact path="/login" element={<Login/>}/>

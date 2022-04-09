@@ -6,20 +6,25 @@ import {login} from '../auth'
 
 
 
-const Login=()=>{
+const Login=(props)=>{
 
 
     
     //const [logged] = useAuth();
     const {register,handleSubmit,reset,formState:{errors}}=useForm()
     const navigate = useNavigate()
-    
+
+     function registerInstead(){
+         props.setIsRegistered(false);
+     };
+
 
     const userLogin=(data)=>{
        console.log(data)
 
        const requestOptions={
            method:"POST",
+           //url:"/token",
            headers:{
                'content-type':'application/json'
            },
@@ -30,6 +35,7 @@ const Login=()=>{
        .then(res=>res.json())
        .then(data=>{
            console.log(data.access_token)
+           //props.setToken(data.access_token)
            
            if (data.access_token){
 
@@ -74,6 +80,7 @@ const Login=()=>{
                     required/>
                 </Form.Group>
                 <br/>
+                <Button onClick={registerInstead}>Register</Button>
                 <Form.Group>
                     <small>Do not have an account? <Link to='/signupdonor'>Create an account as Donor</Link></small>
                     <br></br>

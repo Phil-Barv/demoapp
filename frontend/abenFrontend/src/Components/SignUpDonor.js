@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
 
-const SignUpDonor = () => {
+const SignUpDonor = (props) => {
 
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -37,6 +37,7 @@ const SignUpDonor = () => {
             fetch('/auth/signupdonor', requestOptions)
                 .then(res => res.json())
                 .then(data =>{
+                    props.setToken(data.access_token) 
                     console.log(data)
                     setServerResponse(data.message)
                     setShow(true)
@@ -121,9 +122,6 @@ const SignUpDonor = () => {
         </Card.Body>
     </Card>
 
-    <div className = "w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
-    </div>
 
     
     </>

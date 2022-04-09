@@ -122,7 +122,7 @@ class Login(Resource):
             return jsonify({"message":"Invalid username or password"})
 
 
-'''
+
 @auth_ns.route('/refresh')
 class RefreshResource(Resource):
     @jwt_required(refresh=True)
@@ -134,4 +134,3 @@ class RefreshResource(Resource):
 
         return make_response(jsonify({"access_token":new_access_token}),200)
 
-'''
