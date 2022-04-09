@@ -12,7 +12,7 @@ function Home() {
 
   const { token, removeToken, setToken } = useToken();
 
-  const [userState, setUserState] = useState(2);
+  const [userState, setUserState] = useState(1);
   const [apiResponse, setResponse] = useState({});
   const [isRegistered, setIsRegistered ] = useState(true);
 

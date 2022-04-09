@@ -54,6 +54,7 @@ function LoginPage(props){
                     name="email" 
                     placeholder="Email" 
                     value={loginForm.email} />
+                    
               <input onChange={handleChange} 
                     type="password"
                     text={loginForm.password} 

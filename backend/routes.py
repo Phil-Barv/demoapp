@@ -1,3 +1,4 @@
+import logging
 from backend import app,db,bcrypt
 
 import json
@@ -132,7 +133,7 @@ def createProject():
         description = request.json['description']
         image_url = request.json['imageURL']
         goal = request.json['goal']
-        deadline = datetime.strptime(request.json['deadline'], '%Y-%m-%dT%H:%M')
+        # deadline = datetime.strptime(request.json['deadline'], '%Y-%m-%dT%H:%M')
         target_amount = request.json['targetAmount']
         raised_amount = request.json['raisedAmount']
 
@@ -142,12 +143,11 @@ def createProject():
             description = description,
             image_url = image_url,
             goal = goal,
-            deadline = deadline,
             target_amount = target_amount,
             raised_amount = raised_amount,
             charity_id = 0,
-        )
-            
+            donor_id = 0,
+        )   
         db.session.add(project)
         db.session.commit()
 
@@ -158,33 +158,43 @@ def createProject():
 #update project 
 @app.route('/project/<int:id>/update',methods = ['GET','POST'])
 def updateProject(id):
-
-    project = Project.query.filter_by(employee_id=id).first()
+    project = Project.query.filter_by(id=id).first()
+    print('Updating Project ',id, project)
 
     if request.method == 'POST':
         if project:
+
+            print('Deleteing the project') 
             db.session.delete(project)
             db.session.commit()
-
-            #pass all the necessary  requirement
-            project_title= request.form['project_title']
-            project_description = request.form['project_description']
-            target_amount = request.form['target_amount']
-            currently_raised=request.form['currently_raised']
-            project_id=request.form['project_id']
-
+            print('Deleted the project') 
+            print('Taking info') 
+            title = request.json['title']
+            description = request.json['description']
+            image_url = request.json['imageURL']
+            # goal = request.json['goal']
+            # deadline = datetime.strptime(request.json['deadline'], '%Y-%m-%dT%H:%M')
+            target_amount = request.json['targetAmount']
+            id  = request.json['id']
+            # raised_amount = request.json['raisedAmount']
+            
+            print('Creating the project') 
             #we create an instance of project class
             project = Project(
-            id=id,
-            project_title=project_title,
-             project_description=project_description,
-             target_amount=target_amount,
-             currently_raised=currently_raised,
-             project_id=project_id
-             )
- 
+                title = title,
+                description = description,
+                image_url = image_url,
+                goal = 'Save the world',
+                # deadline = '20201122',
+                target_amount = target_amount,
+                raised_amount = 50000,
+                charity_id = 0,
+                donor_id = 123,
+            )
+
             db.session.add(project)
             db.session.commit()
+            print('CreatEd')
 
         else:
             return {
@@ -192,10 +202,10 @@ def updateProject(id):
             }
  
     return {
-        "response": project
+        "response": 200
     }
 
- #delete project
+#delete project
 
 @app.route('/project/<int:id>/delete', methods=['GET','POST'])
 def deleteProject(id):

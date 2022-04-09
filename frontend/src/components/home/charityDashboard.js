@@ -15,7 +15,9 @@ import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
-import AddProjectForm from '../charityPages/addProjectForm'
+import AddProjectForm from '../charityPages/addProjectForm';
+import BrowseProjects from '../charityPages/browseProjects';
+
 
 import "./index.css"
 
@@ -41,7 +43,7 @@ function CharityDashboard(props) {
   const renderView = () => {
     switch(state){
       default:
-        return(<AddProjectForm token={props.token}/>)
+        return(<BrowseProjects token={props.token}/>)
     }
   }
 

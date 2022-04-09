@@ -44,7 +44,7 @@
         :
           <Stack spacing={2}>
           <Typography variant="h3">Find Meaningful Projects</Typography>
-          <Typography variant="h4">Popular Near You</Typography>
+          <Typography variant="h4">Popular Near You Yo</Typography>
           <Stack direction="row" spacing={3}>
             {projects.map((project, i) => {
               return(
