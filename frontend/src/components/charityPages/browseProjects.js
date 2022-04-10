@@ -21,6 +21,7 @@
 
   import APIService from '../api';
   import AddProjectForm from './addProjectForm';
+  import CloseIcon from '@mui/icons-material/Close';
 
   
   const ProjectBrowser = (props) => {
@@ -59,6 +60,10 @@
       setOpenM2(true);
     };
 
+    const handleClose = () => {
+      setOpenM2(false);
+    };
+
     const addProject = () => {
       APIService.AddProject({
             title,
@@ -79,7 +84,6 @@
       setOpenM2(false);
       window.location.reload()
     }
-
 
     useEffect(() => {
         APIService.GetProjects(props.token
@@ -108,6 +112,7 @@
             aria-describedby="modal-modal-description"
           >
           <div>
+          <Stack spacing = {2} sx ={{justifyContent: 'space-between'}} direction ='row'>
           <form onSubmit = {handleSubmit} >
                 
                 <label htmlFor="title" className="form-label">Title</label>
@@ -165,9 +170,12 @@
 
 
                 <button onClick={handleSubmit}> Create project </button>
-
                 </form>
+          
+          <CloseIcon onClick={handleClose}></CloseIcon>
+          </Stack>
           </div>
+          
           </Modal>
 
           <Stack direction="row" spacing={3}>

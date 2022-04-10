@@ -17,10 +17,6 @@ const ProjectPage = (props) => {
         props.props.setCurrentProject(null);
       }
 
-    function EditInfoModal(e){
-
-    }
-
     const style = {
       position: 'absolute',
       top: '50%',
@@ -35,6 +31,8 @@ const ProjectPage = (props) => {
       boxShadow: 24,
       p: 4,
     };
+
+    
 
     const [openM1, setOpenM1] = useState(false);
     const handleOpenM1 = () => setOpenM1(true);
@@ -55,6 +53,13 @@ const ProjectPage = (props) => {
     };
     const handleCloseM2 = () => setOpenM2(false); // This one should be used for discard changes
     // Add one to update existing values 
+
+    function deleteProject(){
+      APIService.DeleteProject(props.props.pk, props.token)
+      .then((response) => console.log(response))
+      .catch(error => console.log('error',error));
+      window.location.reload();
+    }
 
     function handleSaveCloseM2 (e){
       APIService.UpdateProject(props.props.pk,{
@@ -114,9 +119,11 @@ const ProjectPage = (props) => {
                     <Stack spacing = {2}>                      
                       <Card id= 'side-column-card'>
                         <Stack spacing = {2}>
-                          <Button variant ='contained'onClick ={handleOpenM1}>Update Progress</Button>
+                          {/* <Button variant ='contained'onClick ={handleOpenM1}>Update Progress</Button> */}
                           <Button variant ='outlined' onClick ={handleOpenM2}>Edit Info</Button>
+                          <Button variant ='outlined' onClick ={deleteProject}>Delete Project</Button>
 
+                          
                           {/* Modal for editing progress */}
                           <Modal
                             open={openM2}

@@ -210,16 +210,13 @@ def updateProject(id):
 @app.route('/project/<int:id>/delete', methods=['GET','POST'])
 def deleteProject(id):
     
-    project = Project.query.filter_by(employee_id=id).first()
+    project = Project.query.filter_by(id=id).first()
     
     if request.method == 'POST':
-        
         if project:
             db.session.delete(project)
             db.session.commit()
-
         return { "response": 200 }
-    
     return { "response": 500 }
 
 

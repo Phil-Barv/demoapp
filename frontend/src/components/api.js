@@ -38,6 +38,17 @@ export default class APIService{
     .catch(error => console.log(error))
     };
 
+    static DeleteProject(id, token){
+      return fetch(`/project/${id}/delete`, {
+        'method': 'POST',
+        headers : {
+          'Content-Type':'application/json',
+           Authorization: 'Bearer ' + token
+      },
+    })
+    .then(response => response.json())
+    .catch(error => console.log(error))
+    };
 
     
 
