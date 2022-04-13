@@ -87,7 +87,7 @@ const ProjectPage = (props) => {
     };
 
     console.log(props.props.pk)
-    const [userState, setUserState] = useState(1);
+    const [userState, setUserState] = useState(2);
     const renderView = () => {
       switch(userState){
           case 1: // For charity
@@ -105,7 +105,7 @@ const ProjectPage = (props) => {
                             <p>{props.props.description}</p>
                           </Stack>
                           
-                          <Stack spacing= {4}>
+                          {/* <Stack spacing= {4}>
                             <h2>Key Goals and Resource Needed</h2>
                             
                             <Stack spacing = {2}>
@@ -119,7 +119,7 @@ const ProjectPage = (props) => {
                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis iaculis et velit. Tristique viverra mauris nibh tortor. Lacinia viverra elementum quis id arcu sit sed aliquet at. Rutrum tincidunt purus ut velit, egestas amet eu, sagittis, sit. Eget blandit at enim eget. Lorem morbi eget sociis egestas et libero nulla consequat. Neque sit at non est ornare. Pulvinar pulvinar egestas pharetra, diam ipsum vitae magna. Arcu.</p>
                               <p>Resource Needed: <strong>5,0000 USD</strong></p>
                             </Stack>
-                          </Stack>
+                          </Stack> */}
                       </Stack>
                   </Grid>
                   <Grid item xs={4} >
@@ -225,7 +225,7 @@ const ProjectPage = (props) => {
                             </Stack>
                           </Modal>
 
-                          <Stack direction='row' justifyContent="space-between">
+                          {/* <Stack direction='row' justifyContent="space-between">
                             <Stack spacing = {1}>
                               <h3>{props.props.raised}USD</h3>
                               <p>out of {props.props.target} raised</p>
@@ -237,7 +237,7 @@ const ProjectPage = (props) => {
                           <h4>Donate Now</h4>
                           <TextField id="outlined-basic" label="Donation Amount" variant="outlined" />
                           <Button variant="contained">Donate</Button>
-                          
+                           */}
 
 
                         </Stack>  
@@ -277,7 +277,7 @@ const ProjectPage = (props) => {
                             <p>{props.props.description}</p>
                           </Stack>
                           
-                          <Stack spacing= {4}>
+                          {/* <Stack spacing= {4}>
                             <h2>Key Goals and Resource Needed</h2>
                             
                             <Stack spacing = {2}>
@@ -291,7 +291,7 @@ const ProjectPage = (props) => {
                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis iaculis et velit. Tristique viverra mauris nibh tortor. Lacinia viverra elementum quis id arcu sit sed aliquet at. Rutrum tincidunt purus ut velit, egestas amet eu, sagittis, sit. Eget blandit at enim eget. Lorem morbi eget sociis egestas et libero nulla consequat. Neque sit at non est ornare. Pulvinar pulvinar egestas pharetra, diam ipsum vitae magna. Arcu.</p>
                               <p>Resource Needed: <strong>5,0000 USD</strong></p>
                             </Stack>
-                          </Stack>
+                          </Stack> */}
                       </Stack>
                   </Grid>
 
@@ -307,7 +307,7 @@ const ProjectPage = (props) => {
                             <Stack spacing = {1}>
                               <h3>{props.props.raised}USD</h3>
                               <p>out of {props.props.target} raised</p>
-                              <p>19 more days to go</p>
+                              {/* <p>19 more days to go</p> */}
                             </Stack>
                             <CircularProgressWithLabel variant = 'determinate' value= {75} thickness = {4} size ={80}></CircularProgressWithLabel>
                           </Stack>
