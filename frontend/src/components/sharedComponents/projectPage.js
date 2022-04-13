@@ -87,7 +87,7 @@ const ProjectPage = (props) => {
     };
 
     console.log(props.props.pk)
-    const [userState, setUserState] = useState(2);
+    const [userState, setUserState] = useState(1);
     const renderView = () => {
       switch(userState){
           case 1: // For charity
