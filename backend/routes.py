@@ -163,12 +163,10 @@ def updateProject(id):
 
     if request.method == 'POST':
         if project:
+            
 
-            print('Deleteing the project') 
-            db.session.delete(project)
-            db.session.commit()
-            print('Deleted the project') 
-            print('Taking info') 
+            
+            print('Fetching new info') 
             title = request.json['title']
             description = request.json['description']
             image_url = request.json['imageURL']
@@ -177,24 +175,22 @@ def updateProject(id):
             target_amount = request.json['targetAmount']
             id  = request.json['id']
             # raised_amount = request.json['raisedAmount']
-            
-            print('Creating the project') 
-            #we create an instance of project class
-            project = Project(
-                title = title,
-                description = description,
-                image_url = image_url,
-                goal = 'Save the world',
-                # deadline = '20201122',
-                target_amount = target_amount,
-                raised_amount = 50000,
-                charity_id = 0,
-                donor_id = 123,
-            )
 
-            db.session.add(project)
+            print('Update the project')
+            if title != '':
+                project.title = title
+            
+            if description != '':
+                project.description = description
+            
+            if image_url != '':
+                project.image_url= image_url
+
+            if target_amount != '':
+                project.target_amount = target_amount
+
             db.session.commit()
-            print('CreatEd')
+
 
         else:
             return {

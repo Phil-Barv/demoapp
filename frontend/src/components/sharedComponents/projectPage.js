@@ -26,17 +26,24 @@ const ProjectPage = (props) => {
       height: '50%',
       overflowY: 'scroll',
       scrollBehavior: 'smooth',
-      bgcolor: 'background.paper',
+      bgcolor: 'white',
       border: '2px solid #000',
       boxShadow: 24,
       p: 4,
     };
 
     
-
+    
     const [openM1, setOpenM1] = useState(false);
     const handleOpenM1 = () => setOpenM1(true);
     const handleCloseM1 = () => setOpenM1(false);      
+
+    const [openM3, setOpenM3] = useState(false);
+    const handleOpenM3 = () => setOpenM3(true);
+    const handleCloseM3 = () => setOpenM3(false);      
+
+
+
     const [openM2, setOpenM2] = useState(false);
 
     const id = useState(props.props.pk);
@@ -58,6 +65,7 @@ const ProjectPage = (props) => {
       APIService.DeleteProject(props.props.pk, props.token)
       .then((response) => console.log(response))
       .catch(error => console.log('error',error));
+      setOpenM3(false);
       window.location.reload();
     }
 
@@ -121,8 +129,7 @@ const ProjectPage = (props) => {
                         <Stack spacing = {2}>
                           {/* <Button variant ='contained'onClick ={handleOpenM1}>Update Progress</Button> */}
                           <Button variant ='outlined' onClick ={handleOpenM2}>Edit Info</Button>
-                          <Button variant ='outlined' onClick ={deleteProject}>Delete Project</Button>
-
+                          <Button variant ='outlined' onClick ={handleOpenM3}>Delete Project</Button>
                           
                           {/* Modal for editing progress */}
                           <Modal
@@ -205,66 +212,18 @@ const ProjectPage = (props) => {
                           </Grid>
                           </Modal>
 
-                          {/* Modal for editing progress */}
                           <Modal
-                            open={openM1}
+                            open={openM3}
+                            sx ={style}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description"
                           >
-                            <Stack sx= {style} spacing ={4}>
-                              <Stack direction ='row' style={{justifyContent: 'space-between'}}>
-                                <h3>Latest Progress Report from the Charity</h3>
-                                <IconButton onClick={handleCloseM1}>
-                                    <CloseIcon/>
-                                </IconButton>
-                              </Stack>
-                              <TextField multiline placeholder="Update people who donate to your charity what your project has achieved since last time!"></TextField>
-                            
-                              <Grid container style={{justifyContent: 'space-between' }}>
-                                <Grid item xs={8}>
-                                  <Stack spacing = {2}>
-                                      <h4>Goal 1: Lorem ipsum dolor sit amet</h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis iaculis et velit. Tristique viverra mauris nibh tortor. Lacinia viverra elementum quis id arcu sit sed aliquet at. Rutrum tincidunt purus ut velit, egestas amet eu, sagittis, sit. Eget blandit at enim eget. Lorem morbi eget sociis egestas et libero nulla consequat. Neque sit at non est ornare. Pulvinar pulvinar egestas pharetra, diam ipsum vitae magna. Arcu.</p>
-                                  </Stack>
-                                </Grid>
-
-                                <Grid item xs={3}>
-                                  <Stack spacing = {2}>
-                                    <h4>% Completed</h4>
-                                    <TextField placeholder="50%"></TextField>
-                                  </Stack>
-                                </Grid>
-                              </Grid>
-                            
-                              <Grid container style={{justifyContent: 'space-between' }}>
-                                <Grid item xs={8}>
-                                  <Stack spacing = {2}>
-                                      <h4>Goal 1: Lorem ipsum dolor sit amet</h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis iaculis et velit. Tristique viverra mauris nibh tortor. Lacinia viverra elementum quis id arcu sit sed aliquet at. Rutrum tincidunt purus ut velit, egestas amet eu, sagittis, sit. Eget blandit at enim eget. Lorem morbi eget sociis egestas et libero nulla consequat. Neque sit at non est ornare. Pulvinar pulvinar egestas pharetra, diam ipsum vitae magna. Arcu.</p>
-                                  </Stack>
-                                </Grid>
-
-                                <Grid item xs={3}>
-                                  <Stack spacing = {2}>
-                                    <h4>% Completed</h4>
-                                    <TextField placeholder="50%"></TextField>
-                                  </Stack>
-                                </Grid>
-                              </Grid>
-
-                              <Stack spacing ={2}>
-                                <Button variant ='contained' onClick={handleCloseM1}>Save Changes</Button>
-                                <Button variant = 'outlined' onClick={handleCloseM1}>Discard Changes</Button>
-                              </Stack>
+                            <Stack>
+                              <div>Are you sure you want to delete this project?</div>
+                              <Button variant ='contained' onClick ={deleteProject}> Yes</Button>
+                              <Button variant ='outlined'  onClick ={handleCloseM3}> No</Button>
                             </Stack>
-
-
-
                           </Modal>
-
-
-
-
 
                           <Stack direction='row' justifyContent="space-between">
                             <Stack spacing = {1}>
