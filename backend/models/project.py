@@ -18,4 +18,14 @@ class Project(db.Model):
     def __repr__(self):
         return f'<Project Title: {self.title} Target: {self.target_amount} Raised: {self.raised_amount} Date Created: {self.date_created}>'
 
+    def jsonify(self):
+        return {    "id":self.id,
+                    "title":self.title,
+                    "description":self.description,
+                    "image_url":self.image_url,
+                    "goal":self.goal,
+                    "deadline":self.deadline,
+                    "target_amount":self.target_amount,
+                    "raised_amount":self.raised_amount
+                }
         
