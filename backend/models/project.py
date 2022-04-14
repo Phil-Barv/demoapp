@@ -7,7 +7,7 @@ class Project(db.Model):
     title = db.Column(db.String(20), nullable=False) #project name
     description = db.Column(db.String(600), nullable=False) #project description 
     image_url = db.Column(db.String(600), nullable=False) # project image
-    goal = db.Column(db.String(600), nullable=False) # project goal
+    # goal = db.Column(db.String(600), nullable=False) # project goal
     deadline = db.Column(db.DateTime,  nullable=True) #deadline to raise money
     target_amount = db.Column(db.Integer(), nullable=False)  #amount to raise
     raised_amount = db.Column(db.Integer(), nullable=False)  #currently raised
@@ -25,7 +25,7 @@ class Project(db.Model):
                     "title":self.title,
                     "description":self.description,
                     "image_url":self.image_url,
-                    "goal":self.goal,
+                    # "goal":self.goal,
                     # "deadline":self.deadline,
                     "target_amount":self.target_amount,
                     "raised_amount":self.raised_amount

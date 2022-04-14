@@ -49,10 +49,11 @@ const ProjectPage = (props) => {
     const id = useState(props.props.pk);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [goal, setGoal] = useState('');
+    const [image_url, setImageUrl] = useState('');
+    // const [goal, setGoal] = useState('');
     const [deadline, setDeadline] = useState('');
     const [targetAmount, setTargetAmount] = useState('');
-    const [raisedAmount, setRaisedAmount] = useState('');
+    // const [raisedAmount, setRaisedAmount] = useState('');
     const imageURL = "https://placekitten.com/200/140";
     
     const handleOpenM2 = () => {
@@ -74,7 +75,7 @@ const ProjectPage = (props) => {
         id,
         title,
         description,
-        imageURL,
+        image_url,
         // goal,
         // deadline,
         targetAmount,
@@ -167,41 +168,25 @@ const ProjectPage = (props) => {
                                 <Stack spacing={1}>
                                 <h2>Project Image</h2>
                                 
-                                <input
-                                  accept="image/*"
-                                  style={{ display: 'none' }}
-                                  id="upload_org_img"
-                                  type="image.file"
-                                />
-                                <label htmlFor="upload_org_img">
-                                  <Button variant="contained" component="span">
-                                    Upload
-                                  </Button>
-                                </label> 
-                                {/* Something needs to happen here to take the image */}
-                                </Stack>
+                                <TextField 
+                                  placeholder="Image URL"
+                                  defaultValue={props.props.image_url}
+                                  onChange={(e)=>setImageUrl(e.target.value, console.log(e.target.value))} 
 
-                                {/* Key Goals */}
-                                <Stack spacing={2}>
-                                  <h2>Key Goals and Resource Needed</h2>
-                                  <Grid container spacing ={0}>
-                                    <Grid item xs= {2}>
-                                      <h3>Goal 1</h3> 
-                                    </Grid>
-                                    <Grid item xs ={10}>
-                                      <TextField 
-                                        required 
-                                        fullWidth id="goals_name" 
-                                        label="goal name" 
-                                        variant="outlined"
-                                        // defaultValue={props.props.description}
-                                        // onChange={(e)=>setDescription(e.target.value, console.log(e.target.value))} 
-                                        />
-                                    </Grid>
-                                  </Grid>
-                                  <TextField multiline required id="goals_description" label="goal description" variant="outlined" />
-                                </Stack>
+                                ></TextField>
+                                
+                                </Stack >
+                                
+                                <Stack spacing= {1}>
+                                  <h2>Target Amount</h2>
+                                  <TextField
+                                    placeholder = "amount needed"
+                                    defaultValue={props.props.target}
+                                    onChange={(e)=>setTargetAmount(e.target.value, console.log(e.target.value))} >
 
+                                    </TextField>
+
+                                  </Stack>
                                   </Stack>
 
                               </Grid>

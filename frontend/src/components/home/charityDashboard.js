@@ -54,17 +54,11 @@ function CharityDashboard(props) {
       <Stack id="dashboard-sidebar">
         <List component="nav">
         <React.Fragment>
-      <ListItemButton onClick={() => setState(1)} disabled>
-        <ListItemIcon>
-          <DashboardOutlinedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Your Projects" />
-      </ListItemButton>
       <ListItemButton onClick={() => setState(2)}>
         <ListItemIcon>
           <FavoriteBorderOutlinedIcon />
         </ListItemIcon>
-        <ListItemText primary="Add Project" />
+        <ListItemText primary="View/Add Project" />
       </ListItemButton>
       <ListItemButton onClick={() => setState(3)} disabled>
         <ListItemIcon>

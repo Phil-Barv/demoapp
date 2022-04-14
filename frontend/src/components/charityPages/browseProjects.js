@@ -31,7 +31,7 @@
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-      width: '50%',
+      width: '20%',
       height: '50%',
       overflowY: 'scroll',
       scrollBehavior: 'smooth',
@@ -51,7 +51,7 @@
     const [deadline, setDeadline] = useState('');
     const [targetAmount, setTargetAmount] = useState('');
     const [raisedAmount, setRaisedAmount] = useState('');
-    const imageURL = "https://placekitten.com/200/140";
+    const [image_url, setImageUrl] = useState('');
 
 
     const [openM2, setOpenM2] = useState(false);
@@ -68,11 +68,10 @@
       APIService.AddProject({
             title,
             description,
-            imageURL,
+            image_url,
             goal,
             // deadline,
-            targetAmount,
-            raisedAmount
+            targetAmount
         }, props.token
         ).then((response) => console.log(response))
         .catch(error => console.log('error',error))
@@ -114,7 +113,7 @@
           <div>
           <Stack spacing = {2} sx ={{justifyContent: 'space-between'}} direction ='row'>
           <form onSubmit = {handleSubmit} >
-                
+              <Stack spacing ={1}>
                 <label htmlFor="title" className="form-label">Title</label>
                 <input 
                     type="text"
@@ -133,13 +132,12 @@
                     onChange={(e)=>setDescription(e.target.value)}
                     required></textarea>
 
-                <label htmlFor="goal" className="form-label">Goal</label>
+                <label htmlFor="image_url" className="form-label">Goal</label>
                 <textarea 
                     className="form-control" 
-                    placeholder ="Enter Goal" 
-                    rows='6'
-                    value={goal}
-                    onChange={(e)=>setGoal(e.target.value)}
+                    placeholder ="Image Url" 
+                    value={image_url}
+                    onChange={(e)=>setImageUrl(e.target.value)}
                     required></textarea>
 
                 <label htmlFor="deadline" className="form-label">Deadline</label>
@@ -159,17 +157,17 @@
                     onChange={(e)=>setTargetAmount(e.target.value)}
                     required />
 
-                <label htmlFor="raisedAmount" className="form-label">Raised Amount</label>
+                {/* <label htmlFor="raisedAmount" className="form-label">Raised Amount</label>
                 <input 
                     type="number"
                     className="form-control" 
                     placeholder ="Enter Your Riased Amount"
                     value={raisedAmount}
                     onChange={(e)=>setRaisedAmount(e.target.value)}
-                    required />
-
+                    required /> */}
 
                 <button onClick={handleSubmit}> Create project </button>
+                </Stack>
                 </form>
           
           <CloseIcon onClick={handleClose}></CloseIcon>
@@ -186,8 +184,9 @@
                   pk={project["id"]}
                   name={project["title"]}
                   description={project["description"]}
-                  raised={project["raised_amount"]}
                   target={project["target_amount"]}
+                  raised = {project["raised_amount"]}
+                  image_url = {project['image_url']}
                   setCurrentProject={setCurrentProject}
                 />
               </div>

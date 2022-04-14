@@ -128,23 +128,23 @@ def createProject():
             )
             db.session.add(charity)
             db.session.commit()
+        
 
         title = request.json['title']
         description = request.json['description']
-        image_url = request.json['imageURL']
-        goal = request.json['goal']
+        image_url = request.json['image_url']
+        # goal = request.json['goal']
         # deadline = datetime.strptime(request.json['deadline'], '%Y-%m-%dT%H:%M')
         target_amount = request.json['targetAmount']
-        raised_amount = request.json['raisedAmount']
 
         #we create an instance of project class
         project = Project(
             title = title,
             description = description,
             image_url = image_url,
-            goal = goal,
-            target_amount = target_amount,
-            raised_amount = raised_amount,
+            # goal = goal,
+            target_amount = int(target_amount),
+            raised_amount = 0,
             charity_id = 0,
             donor_id = 0,
         )   
@@ -164,12 +164,10 @@ def updateProject(id):
     if request.method == 'POST':
         if project:
             
-
-            
             print('Fetching new info') 
             title = request.json['title']
             description = request.json['description']
-            image_url = request.json['imageURL']
+            image_url = request.json['image_url']
             # goal = request.json['goal']
             # deadline = datetime.strptime(request.json['deadline'], '%Y-%m-%dT%H:%M')
             target_amount = request.json['targetAmount']
