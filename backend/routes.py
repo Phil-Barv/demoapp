@@ -1,6 +1,5 @@
-from backend import app,db,abort,bcrypt
+from backend import app,db,bcrypt
 from flask import render_template, request, redirect
-from backend.models import Donor, Charity, Project
 
 import json
 from datetime import datetime, timedelta, timezone
