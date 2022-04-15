@@ -1,5 +1,6 @@
-import logging
-from backend import app,db,bcrypt
+from backend import app,db,abort,bcrypt
+from flask import render_template, request, redirect
+from backend.models import Donor, Charity, Project
 
 import json
 from datetime import datetime, timedelta, timezone
@@ -75,6 +76,7 @@ def index():
 #Get all projects
 #retreiving  all projects
 @app.route('/project', methods =['GET'])
+
 @jwt_required()
 def getAllProjects():
     projects = Project.query.all()
@@ -107,7 +109,7 @@ def getOneProject(id):
 #         return render_template('project.html', project = project)
 #     return f"Sorry, project  with id ={id} does not exist"
 
-
+    
 #Creating a new project
 @app.route('/project/create', methods = ['POST'], strict_slashes=False)
 def createProject():
@@ -118,6 +120,7 @@ def createProject():
      
     #if post request
     #set this to the form
+    
     if request.method == 'POST':
 
         if not Charity.query.filter_by(id=1).first():
@@ -158,6 +161,7 @@ def createProject():
 #update project 
 @app.route('/project/<int:id>/update',methods = ['GET','POST'])
 def updateProject(id):
+  
     project = Project.query.filter_by(id=id).first()
     print('Updating Project ',id, project)
 
