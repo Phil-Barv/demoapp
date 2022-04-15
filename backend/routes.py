@@ -131,27 +131,26 @@ def createProject():
             )
             db.session.add(charity)
             db.session.commit()
+        
 
         title = request.json['title']
         description = request.json['description']
-        image_url = request.json['imageURL']
-        goal = request.json['goal']
-        deadline = datetime.strptime(request.json['deadline'], '%Y-%m-%dT%H:%M')
+        image_url = request.json['image_url']
+        # goal = request.json['goal']
+        # deadline = datetime.strptime(request.json['deadline'], '%Y-%m-%dT%H:%M')
         target_amount = request.json['targetAmount']
-        raised_amount = request.json['raisedAmount']
 
         #we create an instance of project class
         project = Project(
             title = title,
             description = description,
             image_url = image_url,
-            goal = goal,
-            deadline = deadline,
-            target_amount = target_amount,
-            raised_amount = raised_amount,
+            # goal = goal,
+            target_amount = int(target_amount),
+            raised_amount = 0,
             charity_id = 0,
-        )
-            
+            donor_id = 0,
+        )   
         db.session.add(project)
         db.session.commit()
 
@@ -162,33 +161,38 @@ def createProject():
 #update project 
 @app.route('/project/<int:id>/update',methods = ['GET','POST'])
 def updateProject(id):
-    project = Project.query.filter_by(employee_id=id).first()
   
+    project = Project.query.filter_by(id=id).first()
+    print('Updating Project ',id, project)
+
     if request.method == 'POST':
         if project:
-            db.session.delete(project)
+            
+            print('Fetching new info') 
+            title = request.json['title']
+            description = request.json['description']
+            image_url = request.json['image_url']
+            # goal = request.json['goal']
+            # deadline = datetime.strptime(request.json['deadline'], '%Y-%m-%dT%H:%M')
+            target_amount = request.json['targetAmount']
+            id  = request.json['id']
+            # raised_amount = request.json['raisedAmount']
+
+            print('Update the project')
+            if title != '':
+                project.title = title
+            
+            if description != '':
+                project.description = description
+            
+            if image_url != '':
+                project.image_url= image_url
+
+            if target_amount != '':
+                project.target_amount = target_amount
+
             db.session.commit()
 
-            #pass all the necessary  requirement
-            project_title= request.form['project_title']
-            project_description = request.form['project_description']
-            target_amount = request.form['target_amount']
-            currently_raised=request.form['currently_raised']
-            project_id=request.form['project_id']
-
-        #we create an instance of project class
-
-            project = Project(
-            id=id,
-            project_title=project_title,
-             project_description=project_description,
-             target_amount=target_amount,
-             currently_raised=currently_raised,
-             project_id=project_id
-             )
- 
-            db.session.add(project)
-            db.session.commit()
 
         else:
             return {
@@ -196,24 +200,21 @@ def updateProject(id):
             }
  
     return {
-        "response": project
+        "response": 200
     }
 
- #delete project
+#delete project
 
 @app.route('/project/<int:id>/delete', methods=['GET','POST'])
 def deleteProject(id):
     
-    project = Project.query.filter_by(employee_id=id).first()
+    project = Project.query.filter_by(id=id).first()
     
     if request.method == 'POST':
-        
         if project:
             db.session.delete(project)
             db.session.commit()
-
         return { "response": 200 }
-    
     return { "response": 500 }
 
 

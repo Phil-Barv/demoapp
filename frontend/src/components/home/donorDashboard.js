@@ -66,7 +66,7 @@ function DonorDashboard(props) {
         </ListItemIcon>
         <ListItemText primary="Browse Projects" />
       </ListItemButton>
-      <ListItemButton onClick={() => setState(2)} disabled>
+      <ListItemButton onClick={() => setState(2)}>
         <ListItemIcon>
           <FavoriteBorderOutlinedIcon />
         </ListItemIcon>

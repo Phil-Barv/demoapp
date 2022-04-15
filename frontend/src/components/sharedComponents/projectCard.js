@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
+import { Button } from '@mui/material';
 import "./projectCard.css"
 
 export default function ProjectCard(props) {
@@ -44,7 +44,7 @@ export default function ProjectCard(props) {
 
 
         <IconButton aria-label="add to favorites" onClick={openProject}>
-            {(donorProject && donorProject.liked) ? <FavoriteIcon sx={{color:"red"}} /> : <FavoriteIcon /> }
+            <Button variant='contained'>View More</Button>
         </IconButton>
         </Stack>
 

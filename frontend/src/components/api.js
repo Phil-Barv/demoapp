@@ -25,4 +25,31 @@ export default class APIService{
           })
     };
 
+    static UpdateProject(id, body, token){
+      return fetch(`/project/${id}/update`, {
+        'method': 'POST',
+        headers : {
+          'Content-Type':'application/json',
+           Authorization: 'Bearer ' + token
+      },
+      body:JSON.stringify(body)
+    })
+    .then(response => response.json())
+    .catch(error => console.log(error))
+    };
+
+    static DeleteProject(id, token){
+      return fetch(`/project/${id}/delete`, {
+        'method': 'POST',
+        headers : {
+          'Content-Type':'application/json',
+           Authorization: 'Bearer ' + token
+      },
+    })
+    .then(response => response.json())
+    .catch(error => console.log(error))
+    };
+
+    
+
 }

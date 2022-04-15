@@ -15,7 +15,9 @@ import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
-import AddProjectForm from '../charityPages/addProjectForm'
+import AddProjectForm from '../charityPages/addProjectForm';
+import BrowseProjects from '../charityPages/browseProjects';
+
 
 import "./index.css"
 
@@ -41,7 +43,7 @@ function CharityDashboard(props) {
   const renderView = () => {
     switch(state){
       default:
-        return(<AddProjectForm token={props.token}/>)
+        return(<BrowseProjects token={props.token}/>)
     }
   }
 
@@ -52,17 +54,11 @@ function CharityDashboard(props) {
       <Stack id="dashboard-sidebar">
         <List component="nav">
         <React.Fragment>
-      <ListItemButton onClick={() => setState(1)} disabled>
-        <ListItemIcon>
-          <DashboardOutlinedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Your Projects" />
-      </ListItemButton>
       <ListItemButton onClick={() => setState(2)}>
         <ListItemIcon>
           <FavoriteBorderOutlinedIcon />
         </ListItemIcon>
-        <ListItemText primary="Add Project" />
+        <ListItemText primary="View/Add Project" />
       </ListItemButton>
       <ListItemButton onClick={() => setState(3)} disabled>
         <ListItemIcon>
