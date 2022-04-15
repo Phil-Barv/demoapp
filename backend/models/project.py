@@ -12,7 +12,8 @@ class Project(db.Model):
     target_amount = db.Column(db.Integer(), nullable=False)  #amount to raise
     raised_amount = db.Column(db.Integer(), nullable=False)  #currently raised
     # date_created = db.Column(db.DateTime, default=datetime.utcnow, nullable=False) #porject creation date
-    charity_id = db.Column(db.Integer, db.ForeignKey('charity.id'), nullable=False)
+    charity_id = db.Column(db.Integer, db.ForeignKey('charity.id'))
+    donor_id = db.Column(db.Integer, db.ForeignKey('donor.id'))
 
     def __repr__(self):
         return f'<Project Title: {self.title} Target: {self.target_amount} Raised: {self.raised_amount}>'
