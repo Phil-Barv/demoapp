@@ -1,0 +1,43 @@
+/* styling for login page
+Source: https://blog.logrocket.com/user-authentication-firebase-react-apps/
+*/
+
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .login__container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+  }
+  .login__textBox {
+      background:none;
+      border:none;
+      border-bottom:2px solid black;
+    outline:none;
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .login__btn {
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    border: none;
+    color: white;
+    border-radius:2px;
+    background-color: black;
+  }
+  .login__google {
+    border-radius:2px;
+    background-color: #4285f4;
+  }
+  .login__btn, .login__google {
+      cursor: pointer;
+  }
+  .login div {
+    margin-top: 7px;
+  }
