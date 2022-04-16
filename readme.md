@@ -56,3 +56,8 @@ python app.py
 > ```javascript
 > npm start \
 > ```
+
+9. To run tests for frontend.
+```javascript
+npm test \
+```
