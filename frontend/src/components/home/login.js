@@ -2,12 +2,16 @@ import {useState } from 'react';
 import {  Button, Stack } from '@mui/material';
 
 import {FormInput} from '../sharedComponents/formComponents'
+
+import isEmail from 'validator/lib/isEmail';
+import isLength from 'validator/lib/isLength';
+
 import APIService from '../api'
 
 function LoginPage(props){
 
   const errorMessages = {
-    email:"Make sure you write your email",
+    email:"Make sure you input a valid email",
     password:"Please fill in your password"
   }
 
@@ -17,10 +21,23 @@ function LoginPage(props){
           password: { value:"", error:true }
         });
 
+    function isValid(name, value){
+      switch (name){
+        case "email":
+          if (!isLength(value, {min:1, max: undefined})){ return false }
+          if (!isEmail(value)){ return false }
+          break
+        case "password":
+          if (!isLength(value, {min:1, max: undefined})){ return false }
+          break
+      }
+      return true;
+    }
+
     function handleChange(event) { 
       const {value, name} = event.target;
 
-      if (value.length>1){
+      if (isValid(name, value)){
         setFormData(prevNote => ({ ...prevNote,
           [name]: {value: value, error:false}
         }))
