@@ -27,7 +27,12 @@ function RegisterPage(props){
 
   function register(){
     if (!formData.name.error & !formData.email.error & !formData.password.error){
-      APIService.Register(props.setToken, user, formData.name, formData.email, formData.password);
+      APIService.Register(
+        props.setToken,
+        user,
+        formData.name.value,
+        formData.email.value,
+        formData.password.value);
     }
   };
 

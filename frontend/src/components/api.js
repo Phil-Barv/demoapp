@@ -50,17 +50,18 @@ export default class APIService{
     .catch(error => console.log(error))
     };
 
-    static UserLogin(props, email, password) {
+    static UserLogin(setToken, user, email, password) {
       axios({
         method: "POST",
         url:"/token",
         data:{
+          user: user,
           email: email,
           password: password
          }
       })
       .then((response) => {
-        props.setToken(response.data.access_token)
+        setToken(response.data.access_token)
       }).catch((error) => {
         if (error.response) {
           console.log(error.response)
@@ -74,7 +75,7 @@ export default class APIService{
     static Register(setToken, user, name, email, password) {
       axios({
         method: "POST",
-        url:"/token",
+        url:"/register",
         data:{
           user: user,
           name: name,

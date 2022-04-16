@@ -1,7 +1,5 @@
 import {useState } from 'react';
-import {  Button, FormControl,
-          FormHelperText, 
-          Stack, TextField } from '@mui/material';
+import {  Button, Stack } from '@mui/material';
 
 import {FormInput} from '../sharedComponents/formComponents'
 import APIService from '../api'
@@ -38,7 +36,11 @@ function LoginPage(props){
       event.preventDefault();
 
       if (!formData.email.error & !formData.password.error){
-        APIService.UserLogin(props,email,password);
+        APIService.UserLogin(
+          props.setToken,
+          user,
+          formData.email.value,
+          formData.password.value);
       }
     }
 
