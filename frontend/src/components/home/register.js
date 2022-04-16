@@ -1,29 +1,8 @@
-import {useState } from 'react';
-import {  Button, FormControl, FormHelperText,
-          Stack, TextField } from '@mui/material';
-import APIService from '../api'
+import { useState } from 'react';
+import { Button, Stack } from '@mui/material';
 
-function RegisterInput(props){
-  return (
-    <FormControl error={props.error} >
-      <TextField sx={{backgroundColor:"rgba(255, 255, 255, 1)",borderRadius:"4px"}}
-        label={props.name}
-        name={props.name}
-        value={props.value}
-        onChange={props.onChange}
-        aria-describedby={props.name}
-        type={(props.name=="password")?"password":"normal"}
-        size="small" variant="filled"
-        error={props.error}
-      />
-      {(props.error)
-        ? <FormHelperText id="component-error-text">
-          {props.errorMessage}
-          </FormHelperText>
-        : "" }
-    </FormControl>
-  )
-}
+import {FormInput} from '../sharedComponents/formComponents'
+import APIService from '../api'
 
 function RegisterPage(props){
 
@@ -57,15 +36,15 @@ function RegisterPage(props){
         <h2>Registering as a {user}</h2>
         <Stack component="form" noValidate autoComplete="off" alignItems={"center"}>
             <Stack spacing={2}>
-            <RegisterInput 
+            <FormInput 
               onChange={handleChange} name="name" value={formData.name.value}
               error={formData.name.error} errorMessage={errorMessages.name} 
             />
-            <RegisterInput 
+            <FormInput 
               onChange={handleChange} name="email" value={formData.email.value}
               error={formData.email.error} errorMessage={errorMessages.email} 
             />
-            <RegisterInput 
+            <FormInput 
               onChange={handleChange} name="password" value={formData.password.value}
               error={formData.password.error} errorMessage={errorMessages.password} 
             />

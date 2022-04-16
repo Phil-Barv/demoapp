@@ -1,93 +1,74 @@
-import {useState, useEffect} from 'react';
-import { Box, FormControl, FormHelperText, Input, InputLabel, Stack, TextField } from '@mui/material';
+import {useState } from 'react';
+import {  Button, FormControl,
+          FormHelperText, 
+          Stack, TextField } from '@mui/material';
+
+import {FormInput} from '../sharedComponents/formComponents'
 import APIService from '../api'
-import axios from "axios";
 
 function LoginPage(props){
 
-    // set the initial states for email and passwords
-    const [form, setForm] = useState({
-          email: {
-            value: "",
-            error: true,
-            errorMessage: "Make sure this is not null"
-          },
-          password: { 
-            value:"",
-            error:true,
-            errorMessage: "Make sure this is not null"
-          }
-      });
+  const errorMessages = {
+    email:"Make sure you write your email",
+    password:"Please fill in your password"
+  }
 
-    // render register view
-    function registerInstead(){
-        props.setIsRegistered(false);
-    };
+    // set the initial states for email and passwords
+    const [user, setUser] = useState("Donor");
+    const [formData, setFormData] = useState({
+          email: { value: "", error: true },
+          password: { value:"", error:true }
+        });
 
     function handleChange(event) { 
       const {value, name} = event.target;
 
       if (value.length>1){
-        setForm(prevNote => ({ ...prevNote,
-          [name]: {value: value, error:false, errorMessage:""}
+        setFormData(prevNote => ({ ...prevNote,
+          [name]: {value: value, error:false}
         }))
       } else {
-        setForm(prevNote => ({ ...prevNote,
-          [name]: {value: value, error:true, errorMessage:"Make sure this is not null"}
+        setFormData(prevNote => ({ ...prevNote,
+          [name]: {value: value, error:true}
         }))};
       }
     
-    function userLogin(event, email, password){
+    function login(event, email, password){
+
       event.preventDefault();
-      if (!form.email.error & !form.password.error){
+
+      if (!formData.email.error & !formData.password.error){
         APIService.UserLogin(props,email,password);
       }
     }
 
       return (
         <div id="main_container">
-          <h2>Login</h2>
-          <Stack component="form" noValidate autoComplete="off" justifyContent="space-between">
-            <Stack spacing={2}>
-            <FormControl error={form.password.error} >
-              <TextField sx={{backgroundColor:"rgba(255, 255, 255, 0.7)",borderRadius:"4px"}}
-                label="email"
-                name="email"
-                value={form.email.value}
-                onChange={handleChange}
-                aria-describedby="email"
-                size="small" variant="filled"
-                error={form.email.error}
-              />
-              {(form.email.error)
-                ? <FormHelperText id="component-error-text">
-                  {form.email.errorMessage}
-                  </FormHelperText>
-                : "" }
-            </FormControl>
-            <FormControl error={form.password.error}>
-              <TextField sx={{backgroundColor:"rgba(255, 255, 255, 0.7)",borderRadius:"4px"}}
-                label="password"
-                name="password"
-                type="password"
-                value={form.password.value}
-                onChange={handleChange}
-                aria-describedby="password"
-                size="small" variant="filled"
-                error={form.password.error}
-              />
-              {(form.password.error)
-                ? <FormHelperText id="component-error-text">
-                  {form.password.errorMessage}
-                  </FormHelperText>
-                : ""}
-            </FormControl>
-            </Stack>
-          <Stack direction="row" justifyContent="space-between"> 
-            <button onClick={registerInstead} id='register' >Register</button>
-            <button onClick={userLogin} id='submit'>Submit</button>
-            </Stack>
+          <h2>Login as {user}</h2>
+          <Stack component="form" noValidate autoComplete="off">
+            <Stack spacing={2} alignItems="center">
+            <FormInput 
+              onChange={handleChange} name="email" value={formData.email.value}
+              error={formData.email.error} errorMessage={errorMessages.email} 
+            />
+            <FormInput 
+              onChange={handleChange} name="password" value={formData.password.value}
+              error={formData.password.error} errorMessage={errorMessages.password} 
+            />
+            <Button variant="contained" onClick={login}> Login </Button>
           </Stack>
+          <Stack direction={"row"}>
+            <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}
+              onClick={()=>setUser((user=="Donor")?"Charity":"Donor")}>
+                Login as {(user=="Donor")?"Charity":"Donor"}
+            </Button>
+
+            <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}
+              onClick={()=>props.setIsRegistered(false)}>
+                Register Instead
+            </Button>
+        </Stack>
+        </Stack>
         </div>
       );
 }
