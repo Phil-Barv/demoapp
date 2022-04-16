@@ -17,6 +17,14 @@ pip3 install -r requirements.txt
 python app.py
 ```
 
+#### macOS with Anaconda
+```python3
+conda create -n venv python=3.6.8
+conda activate venv
+pip install -r requirements.txt
+python app.py
+```
+
 #### Windows
 ```python3
 python3.6 -m venv venv
