@@ -3,6 +3,9 @@
 
 # BACKEND
 **/__pycache__/
+venv/
+site.db
+site.py
 
 # FRONTEND
 # dependencies
