@@ -38,7 +38,7 @@ const renderView = () => {
       {!token && token!=="" &&token!== undefined?  
         (isRegistered ?
           <LoginPage setToken={setToken} user={user} setUser={setUser} setIsRegistered={setIsRegistered}/>
-          : <RegisterPage setToken={setToken} user={user} setUser={setUser} setIsRegistered={setIsRegistered}/>)
+          : <RegisterPage user={user} setUser={setUser} setIsRegistered={setIsRegistered}/>)
         : renderView()
       }
     </div> 

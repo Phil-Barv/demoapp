@@ -260,14 +260,14 @@ def register():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
 
-    response = 500
+    registered = False
 
     if name and email and password and user in ["Donor","Charity"]:
         user_created = create_user(user, name, email, password)
         if user_created:
-            response = 200
+            registered = True
 
-    return { "response": response }
+    return { "registered": registered }
 
 #login user
 '''

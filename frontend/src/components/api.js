@@ -61,6 +61,7 @@ export default class APIService{
          }
       })
       .then((response) => {
+        console.log(response.data);
         setToken(response.data.access_token)
       }).catch((error) => {
         if (error.response) {
@@ -72,7 +73,7 @@ export default class APIService{
 
     }
 
-    static Register(setToken, user, name, email, password) {
+    static Register(setIsRegistered, user, name, email, password) {
       axios({
         method: "POST",
         url:"/register",
@@ -84,7 +85,9 @@ export default class APIService{
          }
       })
       .then((response) => {
-        setToken(response.data.access_token)
+        if(response.data.registered==true){
+          setIsRegistered(true);
+        };
       }).catch((error) => {
         if (error.response) {
           console.log(error.response)

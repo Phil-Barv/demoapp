@@ -27,7 +27,7 @@ function RegisterPage(props){
   function register(){
     if (!formData.name.error & !formData.email.error & !formData.password.error){
       APIService.Register(
-        props.setToken,
+        props.setIsRegistered,
         props.user,
         formData.name.value,
         formData.email.value,
