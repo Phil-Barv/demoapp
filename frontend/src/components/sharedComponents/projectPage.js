@@ -250,7 +250,7 @@ const ProjectPage = (props) => {
               return(
                 <Grid container spacing={2} height = "fit-content">
                   <Grid item xs={8}>
-                  <button onClick={closeProject}>close project</button>
+                  <button onClick={closeProject}>Close Project</button>
 
                       <Stack spacing={5} height="fit-content">
                         

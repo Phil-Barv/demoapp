@@ -110,8 +110,8 @@
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-          <div>
-          <Stack spacing = {2} sx ={{justifyContent: 'space-between'}} direction ='row'>
+          <div className='container container-modal'>
+          <Stack spacing = {3} sx ={{justifyContent: 'space-between'}} direction ='row'>
           <form onSubmit = {handleSubmit} >
               <Stack spacing ={1}>
                 <label htmlFor="title" className="form-label">Title</label>
@@ -166,11 +166,10 @@
                     onChange={(e)=>setRaisedAmount(e.target.value)}
                     required /> */}
 
-                <button onClick={handleSubmit}> Create project </button>
+                <button onClick={handleSubmit} id='modal-submit'> Create Project </button>
                 </Stack>
                 </form>
-          
-          <CloseIcon onClick={handleClose}></CloseIcon>
+          <CloseIcon onClick={handleClose} className='form-close'></CloseIcon>
           </Stack>
           </div>
           

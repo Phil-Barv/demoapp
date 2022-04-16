@@ -21,10 +21,10 @@ export default function ProjectCard(props) {
   }
 
   return (
-    <Paper sx={{ minWidth:200, maxWidth: 345, borderRadius:6, padding:0.3}}>
+    <Paper sx={{ minWidth:300, maxWidth: 350, borderRadius:6, padding:0.3}}>
 
       <Paper className="default-cover-gradient" sx={{borderRadius:4}}>
-      <Stack className="default-cover-text" height="100%" justifyContent="end" spacing={1} padding={1}>
+      <Stack className="default-cover-text" height="100%" justifyContent="end" spacing={2} padding={1}>
         <Typography variant="h5" color="text.secondary">
           {props.name}
           </Typography>
@@ -36,15 +36,15 @@ export default function ProjectCard(props) {
   
         <Stack alignItems="center" justifyContent="space-between">
         <Typography mt={1} mb={1} sx={{textAlign:"center"}}>
-          {(props.raised/props.target*100).toFixed(0)}% raised.
+          {(props.raised/props.target*100).toFixed(0)}% raised
         </Typography>
         <Typography mt={1} mb={1} sx={{textAlign:"center"}}>
-            ${props.target-props.raised} more to go.
+            ${props.target-props.raised} more to go
         </Typography>
 
 
         <IconButton aria-label="add to favorites" onClick={openProject}>
-            <Button variant='contained'>View More</Button>
+            <Button variant='contained' className='card-button'>View More</Button>
         </IconButton>
         </Stack>
 

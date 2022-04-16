@@ -45,9 +45,9 @@ function LoginPage(props){
         )}
   
       return (
-        <div>
-          <h1>Login</h1>
-            <form className="login">
+        <div className='container'>
+          <h2>Login</h2>
+            <form>
               <input onChange={handleChange} 
                     type="email"
                     text={loginForm.email} 
@@ -62,9 +62,10 @@ function LoginPage(props){
                     placeholder="Password" 
                     value={loginForm.password} />
   
-            <button onClick={logMeIn}>Submit</button>
+            <button onClick={logMeIn} id='submit'>Submit</button>
+            <button onClick={registerInstead} id='register' >Register</button>
+          
           </form>
-          <button onClick={registerInstead}>Register</button>
         </div>
       );
 }

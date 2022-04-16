@@ -23,3 +23,99 @@
     width:100%;
     text-align:center;
 }
+
+.container {
+    background: linear-gradient(to bottom left, rgb(69, 69, 209), pink);
+    border-radius: 10px;
+    box-shadow: 10px 5px 20px 10px rgba(2, 0, 0, 0.1);
+    min-width: min-content;
+    min-height: max-content;
+    opacity: 0.75;
+    padding: 17px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container h2 {
+    margin: 20px !important;
+    padding: 0 !important;
+    color: rgb(235, 234, 234);
+}
+
+.container form {
+    margin: 0 auto;
+    max-width: 300px;
+    padding: 4em;
+    border: 1px solid #CCC;
+    border-radius: 10px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.container input, textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    padding-left: 20px;
+    border-radius: 15px;
+    border-color: #CCC;
+    border-width: 0.1px;
+    width: 250px;
+}
+
+.container button {
+    display: flex;
+    width: 130px;
+    justify-content: center;
+    border-radius: 15px;
+    border-width: 0.1px;
+    border-color: #CCC;
+    padding: 5px;
+    margin: 9px !important;
+    margin-top: 30px;
+}
+
+.container button:hover {
+    background: linear-gradient(to bottom left, rgb(69, 69, 209), pink);
+    cursor: pointer;
+}
+
+.MuiModal-root {
+    opacity: 95%;
+    box-shadow: none !important;
+    margin-top: 50px;
+    width: 333px !important;
+    height: 525px !important;
+    overflow: hidden !important;
+    border-radius: 15px;
+    border-width: 0 !important;
+}
+
+.container-modal form {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.form-close:hover {
+    cursor: pointer;
+    color: #CCC;
+}
+
+
+#modal-submit {
+    margin: 20px !important;
+    margin-left: 0px !important;
+}
+
+#register {
+    float: left;
+}
+
+#submit {
+    float: right;
+}

@@ -5,27 +5,27 @@ import DonorRegistration from "./donorRegistration";
 
 function RegisterPage(props){
 
-    const [state, setState] = useState("donor");
+    const [state, setState] = useState("Donor");
 
   function loginInstead(){
       props.setIsRegistered(true);
   };
   
     return (
-      <div>
-        <h3>Registering as a {state}</h3>
-        { (state=="donor") ?
+      <div className='container'>
+        <h2>Registering as a {state}</h2>
+        { (state=="Donor") ?
             <>
-            <DonorRegistration />
-            <button onClick={()=>setState("charity")}>Register As Charity</button>
+            <DonorRegistration className='login-input'/>
+            <button onClick={()=>setState("Charity")} id='register'>Register As Charity</button>
             </>
           : <>
             <CharityRegistration />
-            <button onClick={()=>setState("donor")}>Register As A Donor</button>
+            <button onClick={()=>setState("Donor")} id='register'>Register As Donor</button>
             </>
 
         }
-        <button onClick={loginInstead}>Login Instead</button>
+        <button onClick={loginInstead} id='submit'>Login Instead</button>
       </div>
     );
 }
