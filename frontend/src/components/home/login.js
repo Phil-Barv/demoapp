@@ -11,7 +11,7 @@ import APIService from '../api'
 function LoginPage(props){
 
   const errorMessages = {
-    email:"Make sure you input a valid email",
+    email:"Make sure you input a valid your email",
     password:"Please fill in your password"
   }
 
@@ -47,7 +47,7 @@ function LoginPage(props){
         }))};
       }
     
-    function login(event, email, password){
+    function login(event){
 
       event.preventDefault();
 
