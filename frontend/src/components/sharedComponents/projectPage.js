@@ -95,11 +95,11 @@ const ProjectPage = (props) => {
               return(
                 <Grid container spacing={2} height = "fit-content">
                   <Grid item xs={8}>
-                  <button onClick={closeProject}>close project</button>
+                  <Button onClick={closeProject} variant='outlined' id='project-page-button'>Close Project</Button>
 
-                      <Stack spacing={5} height="fit-content">
+                      <Stack spacing={5} height="fit-content" id='project-page-container'>
                           <h1>{props.props.name}</h1>
-                          <img src = 'https://dqelp6tva12fr.cloudfront.net/original_images/charities.jpg' alt="people unpacking donation boxes"/>
+                          <img src = 'https://dqelp6tva12fr.cloudfront.net/original_images/charities.jpg' alt="people unpacking donation boxes" id="project-page-photo"/>
                           
                           <Stack spacing= {2}>
                             <h2>What is this project about?</h2>
@@ -129,22 +129,24 @@ const ProjectPage = (props) => {
                       <Card id= 'side-column-card'>
                         <Stack spacing = {2}>
                           {/* <Button variant ='contained'onClick ={handleOpenM1}>Update Progress</Button> */}
-                          <Button variant ='outlined' onClick ={handleOpenM2}>Edit Info</Button>
-                          <Button variant ='outlined' onClick ={handleOpenM3}>Delete Project</Button>
+                          <Button variant ='contained' onClick ={handleOpenM2}>Edit Info</Button>
+                          <Button variant ='contained' onClick ={handleOpenM3}>Delete Project</Button>
                           
                           {/* Modal for editing progress */}
                           <Modal
                             open={openM2}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description"
+                            className="container"
                           >
-                            <Grid sx= {style} container style={{ gap:50 }}>
-                              <Grid item xs = {8}>
-                              <Stack spacing ={4}>
-                                <Stack spacing={2}>
+                            <Grid >
+                              <Grid >
+                              <Stack >
+                                <Stack >
                                 <h2>Project Name</h2>
                                 <TextField 
-                                  required id="project_name" 
+                                  required 
+                                  id="project_name" 
                                   label="Project Name" 
                                   variant="outlined" 
                                   defaultValue={props.props.name}
@@ -152,7 +154,7 @@ const ProjectPage = (props) => {
                                   />
                                 </Stack>
 
-                                <Stack spacing={1}>
+                                <Stack >
                                 <h2>Project Description</h2>
                                 <TextField 
                                   multiline 
@@ -165,7 +167,7 @@ const ProjectPage = (props) => {
                                   />
                                 </Stack>
 
-                                <Stack spacing={1}>
+                                <Stack>
                                 <h2>Project Image</h2>
                                 
                                 <TextField 
@@ -177,10 +179,10 @@ const ProjectPage = (props) => {
                                 
                                 </Stack >
                                 
-                                <Stack spacing= {1}>
+                                <Stack >
                                   <h2>Target Amount</h2>
                                   <TextField
-                                    placeholder = "amount needed"
+                                    placeholder = "Amount Required"
                                     defaultValue={props.props.target}
                                     onChange={(e)=>setTargetAmount(e.target.value, console.log(e.target.value))} >
 
@@ -190,10 +192,10 @@ const ProjectPage = (props) => {
                                   </Stack>
 
                               </Grid>
-                              <Grid item xs ={4} container style={{ gap: 20 }}>
-                                  <Button variant ='contained' onClick ={handleSaveCloseM2}>Save Changes</Button>
-                                  <Button variant ='outlined' onClick ={handleCloseM2}>Discard Changes</Button>
-                              </Grid>
+                              <Stack direction="row">
+                                  <Button variant ='contained' onClick ={handleSaveCloseM2}>Save</Button>
+                                  <Button variant ='contained' onClick ={handleCloseM2}>Discard</Button>
+                              </Stack>
                           </Grid>
                           </Modal>
 
@@ -202,11 +204,12 @@ const ProjectPage = (props) => {
                             sx ={style}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description"
+                            className="container"
                           >
                             <Stack>
-                              <div>Are you sure you want to delete this project?</div>
+                              <h2>Are you sure you want to delete this project?</h2>
                               <Button variant ='contained' onClick ={deleteProject}> Yes</Button>
-                              <Button variant ='outlined'  onClick ={handleCloseM3}> No</Button>
+                              <Button variant ='contained'  onClick ={handleCloseM3}> No</Button>
                             </Stack>
                           </Modal>
 
@@ -237,7 +240,7 @@ const ProjectPage = (props) => {
                             <h4>Organization Name</h4>
                           </Stack>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut augue quisque nunc sed sodales. Consequat non.</p>
-                          <Button variant="outlined">See Org Info</Button>
+                          <Button variant="contained">See Org Info</Button>
 
                         </Stack>  
                       </Card>
@@ -246,16 +249,17 @@ const ProjectPage = (props) => {
                   </Grid>
                 </Grid>
               )
-          case 2: // If it's a donar
+
+          case 2: // If it's a donor
               return(
                 <Grid container spacing={2} height = "fit-content">
                   <Grid item xs={8}>
-                  <button onClick={closeProject}>Close Project</button>
+                  <Button onClick={closeProject} variant='outlined' id='project-page-button'>Close Project</Button>
 
-                      <Stack spacing={5} height="fit-content">
+                      <Stack spacing={5} height="fit-content" id='project-page-container'>
                         
                           <h1>{props.props.name}</h1>
-                          <img src = 'https://dqelp6tva12fr.cloudfront.net/original_images/charities.jpg' alt="people unpacking donation boxes"/>
+                          <img src = 'https://dqelp6tva12fr.cloudfront.net/original_images/charities.jpg' alt="people unpacking donation boxes" id="project-page-photo"/>
                           
                           <Stack spacing= {2}>
                             <h2>What is this project about?</h2>
@@ -290,14 +294,13 @@ const ProjectPage = (props) => {
                         <Stack spacing = {2}>
                           <Stack direction='row' justifyContent="space-between">
                             <Stack spacing = {1}>
-                              <h3>{props.props.raised}USD</h3>
-                              <p>out of {props.props.target} raised</p>
+                              <h3>${props.props.raised} out of ${props.props.target} raised</h3>
                               {/* <p>19 more days to go</p> */}
                             </Stack>
                             <CircularProgressWithLabel variant = 'determinate' value= {75} thickness = {4} size ={80}></CircularProgressWithLabel>
                           </Stack>
                           
-                          <h4>Donate Now</h4>
+                          <h2>Donate Now</h2>
                           <TextField id="outlined-basic" label="Donation Amount" variant="outlined" />
                           <Button variant="contained">Donate</Button>
                           
@@ -315,7 +318,7 @@ const ProjectPage = (props) => {
                             <h4>Organization Name</h4>
                           </Stack>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut augue quisque nunc sed sodales. Consequat non.</p>
-                          <Button variant="outlined">See Org Info</Button>
+                          <Button variant="contained">See Org Info</Button>
                           
 
                         </Stack>  

@@ -21,7 +21,7 @@ export default function ProjectCard(props) {
   }
 
   return (
-    <Paper sx={{ minWidth:300, maxWidth: 350, borderRadius:6, padding:0.3}}>
+    <Paper sx={{ minWidth:300, maxWidth: 350, borderRadius:7, paddingTop:0.1, paddingBottom:0.7}}>
 
       <Paper className="default-cover-gradient" sx={{borderRadius:4}}>
       <Stack className="default-cover-text" height="100%" justifyContent="end" spacing={2} padding={1}>
