@@ -5,7 +5,7 @@ function CharityRegistration(props){
 
     const [registerForm, setRegisterForm] = useState({
         email: "",
-        username: "",
+        orgname: "",
         password: "",
     })
   
@@ -14,6 +14,7 @@ function CharityRegistration(props){
           method: "POST",
           url:"/token",
           data:{
+            orgname: registerForm.orgname,
             email: registerForm.email,
             password: registerForm.password
            }
@@ -29,6 +30,7 @@ function CharityRegistration(props){
         })
   
         setRegisterForm(({
+          orgname: '',
           email: "",
           password: ""}))
   
@@ -44,6 +46,12 @@ function CharityRegistration(props){
       return (
         <div>
           <form>
+            <input onChange={handleChange} 
+                  type="orgname"
+                  text={registerForm.orgname} 
+                  name="orgname" 
+                  placeholder="Organization Name" 
+                  value={registerForm.orgname} />
             <input onChange={handleChange} 
                   type="email"
                   text={registerForm.email} 

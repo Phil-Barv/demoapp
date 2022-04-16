@@ -7,6 +7,7 @@
 
   import React, { useState, useEffect } from 'react';
 
+  import Grid from '@mui/material/Grid';
   import Modal from "@mui/material/Modal";
   import Typography from "@mui/material/Typography";
   import Stack from "@mui/material/Stack";
@@ -110,8 +111,8 @@
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-          <div>
-          <Stack spacing = {2} sx ={{justifyContent: 'space-between'}} direction ='row'>
+          <div className='container container-modal'>
+          <Stack spacing = {3} sx ={{justifyContent: 'space-between'}} direction ='row'>
           <form onSubmit = {handleSubmit} >
               <Stack spacing ={1}>
                 <label htmlFor="title" className="form-label">Title</label>
@@ -166,20 +167,20 @@
                     onChange={(e)=>setRaisedAmount(e.target.value)}
                     required /> */}
 
-                <button onClick={handleSubmit}> Create project </button>
+                <button onClick={handleSubmit} id='modal-submit'> Create Project </button>
                 </Stack>
                 </form>
-          
-          <CloseIcon onClick={handleClose}></CloseIcon>
+          <CloseIcon onClick={handleClose} className='form-close'></CloseIcon>
           </Stack>
           </div>
           
           </Modal>
 
-          <Stack direction="row" spacing={3}>
+          <Grid container rowSpacing={3}>
             {projects.map((project, i) => {
               return(
-                <div key={i}>
+                <Grid item xs={8} sm={4} >
+                <div key={i} className='container-browse-project'>
                 <ProjectCard
                   pk={project["id"]}
                   name={project["title"]}
@@ -190,10 +191,11 @@
                   setCurrentProject={setCurrentProject}
                 />
               </div>
+              </Grid>
               )
             })
             }
-          </Stack>
+          </Grid>
         
           </Stack>
         }
