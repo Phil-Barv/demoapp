@@ -1,20 +1,20 @@
 /* Main Styling for the dashboard interface */
 
 #dashboard-sidebar{
-    margin-top:3vh;
-    padding:0px 10px;
-    margin-bottom:3vh;
-    height:94vh;
+    margin-top:5vh;
+    padding:0px 25px;
+    margin-bottom:5vh;
+    height:auto;
 }
 
 #dashboard-body{
-    padding:20px;
+    padding:30px;
     margin-top:3vh;
-    margin-bottom:3vh;
-    height:94vh;
+    margin-bottom:5vh;
+    height:auto;
     margin-right:20px;
     border-radius:9px;
-    background-color:#F7F8FA;
+    background-color:#f2f4f8;
 }
 
 #app-title{
@@ -33,10 +33,11 @@
     min-width: min-content;
     min-height: max-content;
     opacity: 0.75;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding: 17px;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
 }
 
 .container, #main_container {
@@ -45,7 +46,7 @@
 }
 
 .container h2 {
-    margin: 20px !important;
+    margin: 15px !important;
     padding: 0 !important;
     color: rgb(235, 234, 234);
 }
@@ -111,6 +112,10 @@
     color: #CCC;
 }
 
+.container-browse-project {
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
 
 #modal-submit {
     margin: 20px !important;
@@ -123,4 +128,47 @@
 
 #submit {
     float: right;
+}
+
+
+/* Project Page */
+
+#side-column-card {
+    margin-top: 50px;
+    margin-left: 27px;
+    padding: 25px !important;
+    overflow-wrap: break-word !important;
+    border-radius: 15px;
+    background: linear-gradient(to bottom left, rgb(69, 69, 209), pink);
+    opacity: 85%;
+
+}
+
+
+#side-column-card h2 {
+    color: white;
+}
+
+
+#side-column-card button {
+    border-radius: 11px;
+}
+
+#side-column-card button:hover, #project-page-button:hover {
+    background: linear-gradient(to bottom left, rgb(69, 69, 209), pink);
+    color: white;
+    cursor: pointer;
+}
+
+#project-page-container {
+    background: linear-gradient(to bottom left, rgb(69, 69, 209), pink);
+    padding: 20px;
+    border-radius: 11px;
+    margin: 10px;
+    margin-top: 20px;
+    opacity: 85%;
+    overflow-wrap: break-word !important;
+}
+#project-page-photo {
+    border-radius: 11px;
 }

@@ -7,6 +7,7 @@
 
   import React, { useState, useEffect } from 'react';
 
+  import Grid from '@mui/material/Grid';
   import Modal from "@mui/material/Modal";
   import Typography from "@mui/material/Typography";
   import Stack from "@mui/material/Stack";
@@ -175,10 +176,11 @@
           
           </Modal>
 
-          <Stack direction="row" spacing={3}>
+          <Grid container rowSpacing={3}>
             {projects.map((project, i) => {
               return(
-                <div key={i}>
+                <Grid item xs={8} sm={4} >
+                <div key={i} className='container-browse-project'>
                 <ProjectCard
                   pk={project["id"]}
                   name={project["title"]}
@@ -189,10 +191,11 @@
                   setCurrentProject={setCurrentProject}
                 />
               </div>
+              </Grid>
               )
             })
             }
-          </Stack>
+          </Grid>
         
           </Stack>
         }

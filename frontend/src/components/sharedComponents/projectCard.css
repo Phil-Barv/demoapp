@@ -17,4 +17,5 @@
 
 .card-button:hover {
     background: linear-gradient(45deg, pink 0%, rgb(69, 69, 209) 100%);
+    cursor: pointer;
 }

@@ -2,6 +2,8 @@
 */
 
 import React, { useState } from 'react';
+
+import Grid from '@mui/material/Grid';
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -32,9 +34,10 @@ const YourDonations = (props) => {
         </Stack>
         <div>
         <Typography variant="h4" component="h2" mb={3}>Projects You Liked</Typography>
-        <Stack direction="row" spacing={3}>
+        <Grid container rowSpacing={3}>
           {projects.map(((project, index) => {
             return(
+              <Grid item xs={8} sm={4} >
               <div key={index}>
                 <ProjectCard
                   pk={project["pk"]}
@@ -45,9 +48,10 @@ const YourDonations = (props) => {
                   donorID={props.donorID}
                 />
               </div>
+              </Grid>
             )
           } ))}
-        </Stack>
+        </Grid>
         </div>
     </Stack>
 
