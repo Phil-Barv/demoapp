@@ -14,6 +14,7 @@ function CharityRegistration(props){
           method: "POST",
           url:"/token",
           data:{
+            username: registerForm.username,
             email: registerForm.email,
             password: registerForm.password
            }
@@ -29,6 +30,7 @@ function CharityRegistration(props){
         })
   
         setRegisterForm(({
+          username: '',
           email: "",
           password: ""}))
   
@@ -44,6 +46,12 @@ function CharityRegistration(props){
       return (
         <div>
           <form>
+            <input onChange={handleChange} 
+                  type="username"
+                  text={registerForm.username} 
+                  name="username" 
+                  placeholder="Organization Name" 
+                  value={registerForm.username} />
             <input onChange={handleChange} 
                   type="email"
                   text={registerForm.email} 

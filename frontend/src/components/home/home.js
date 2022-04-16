@@ -19,12 +19,12 @@ function Home() {
 const renderView = () => {
     switch(userState){
         case 1:
-            return(<CharityDashboard
-                      removeToken={removeToken}
-                      token={token}
-                      response={apiResponse}/>)
+          return(<DonorDashboard
+                    removeToken={removeToken}
+                    token={token}
+                    response={apiResponse}/>)
         case 2:
-            return(<DonorDashboard
+            return(<CharityDashboard
                       removeToken={removeToken}
                       token={token}
                       response={apiResponse}/>)
