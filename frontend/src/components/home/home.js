@@ -8,6 +8,8 @@ import RegisterPage from './register';
 import CharityDashboard from './charityDashboard';
 import DonorDashboard from './donorDashboard';
 
+import "./index.css"
+
 function Home() {
 
   const { token, removeToken, setToken } = useToken();

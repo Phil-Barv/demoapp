@@ -12,7 +12,7 @@ function RegisterPage(props){
   };
   
     return (
-      <div className='container'>
+      <div  id="main_container">
         <h2>Registering as a {state}</h2>
         { (state=="Donor") ?
             <>

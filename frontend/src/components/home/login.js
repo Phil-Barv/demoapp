@@ -45,18 +45,18 @@ function LoginPage(props){
     }
 
       return (
-        <div className='container'>
+        <div id="main_container">
           <h2>Login</h2>
           <Stack component="form" noValidate autoComplete="off" justifyContent="space-between">
             <Stack spacing={2}>
-            <FormControl error={form.password.error}>
-              <TextField
+            <FormControl error={form.password.error} >
+              <TextField sx={{backgroundColor:"rgba(255, 255, 255, 0.7)",borderRadius:"4px"}}
                 label="email"
                 name="email"
                 value={form.email.value}
                 onChange={handleChange}
                 aria-describedby="email"
-                size="small"
+                size="small" variant="filled"
                 error={form.email.error}
               />
               {(form.email.error)
@@ -66,14 +66,14 @@ function LoginPage(props){
                 : "" }
             </FormControl>
             <FormControl error={form.password.error}>
-              <TextField
+              <TextField sx={{backgroundColor:"rgba(255, 255, 255, 0.7)",borderRadius:"4px"}}
                 label="password"
                 name="password"
                 type="password"
                 value={form.password.value}
                 onChange={handleChange}
                 aria-describedby="password"
-                size="small"
+                size="small" variant="filled"
                 error={form.password.error}
               />
               {(form.password.error)
