@@ -12,7 +12,6 @@ function LoginPage(props){
   }
 
     // set the initial states for email and passwords
-    const [user, setUser] = useState("Donor");
     const [formData, setFormData] = useState({
           email: { value: "", error: true },
           password: { value:"", error:true }
@@ -38,7 +37,7 @@ function LoginPage(props){
       if (!formData.email.error & !formData.password.error){
         APIService.UserLogin(
           props.setToken,
-          user,
+          props.user,
           formData.email.value,
           formData.password.value);
       }
@@ -46,7 +45,7 @@ function LoginPage(props){
 
       return (
         <div id="main_container">
-          <h2>Login as {user}</h2>
+          <h2>Login as {props.user}</h2>
           <Stack component="form" noValidate autoComplete="off">
             <Stack spacing={2} alignItems="center">
             <FormInput 
@@ -61,8 +60,8 @@ function LoginPage(props){
           </Stack>
           <Stack direction={"row"}>
             <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}
-              onClick={()=>setUser((user=="Donor")?"Charity":"Donor")}>
-                Login as {(user=="Donor")?"Charity":"Donor"}
+              onClick={()=>props.setUser((props.user=="Donor")?"Charity":"Donor")}>
+                Login as {(props.user=="Donor")?"Charity":"Donor"}
             </Button>
 
             <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}

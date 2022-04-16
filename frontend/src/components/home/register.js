@@ -12,7 +12,6 @@ function RegisterPage(props){
     password:"Please inpur a valid password"
   }
 
-  const [user, setUser] = useState("Donor");
   const [formData, setFormData] = useState({
     name: {value:"", error:true},
     email: {value:"", error:true},
@@ -29,7 +28,7 @@ function RegisterPage(props){
     if (!formData.name.error & !formData.email.error & !formData.password.error){
       APIService.Register(
         props.setToken,
-        user,
+        props.user,
         formData.name.value,
         formData.email.value,
         formData.password.value);
@@ -38,7 +37,7 @@ function RegisterPage(props){
 
     return (
       <div  id="main_container">
-        <h2>Register as a {user}</h2>
+        <h2>Register as a {props.user}</h2>
         <Stack component="form" noValidate autoComplete="off" alignItems={"center"}>
             <Stack spacing={2}>
             <FormInput 
@@ -62,8 +61,8 @@ function RegisterPage(props){
         <Stack direction={"row"}>
 
           <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}
-            onClick={()=>setUser((user=="Donor")?"Charity":"Donor")}>
-              Register as a {(user=="Donor")?"Charity":"Donor"}
+            onClick={()=>props.setUser((props.user=="Donor")?"Charity":"Donor")}>
+              Register as a {(props.user=="Donor")?"Charity":"Donor"}
           </Button>
 
           <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}

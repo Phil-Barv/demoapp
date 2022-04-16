@@ -14,18 +14,18 @@ function Home() {
 
   const { token, removeToken, setToken } = useToken();
 
-  const [userState, setUserState] = useState(1);
+  const [user, setUser] = useState("Donor");
   const [apiResponse, setResponse] = useState({});
   const [isRegistered, setIsRegistered ] = useState(true);
 
 const renderView = () => {
-    switch(userState){
-        case 1:
+    switch(user){
+        case "Donor":
           return(<DonorDashboard
                     removeToken={removeToken}
                     token={token}
                     response={apiResponse}/>)
-        case 2:
+        case "Charity":
             return(<CharityDashboard
                       removeToken={removeToken}
                       token={token}
@@ -37,8 +37,8 @@ const renderView = () => {
     <div>
       {!token && token!=="" &&token!== undefined?  
         (isRegistered ?
-          <LoginPage setToken={setToken} setIsRegistered={setIsRegistered}/>
-          : <RegisterPage setToken={setToken} setIsRegistered={setIsRegistered}/>)
+          <LoginPage setToken={setToken} user={user} setUser={setUser} setIsRegistered={setIsRegistered}/>
+          : <RegisterPage setToken={setToken} user={user} setUser={setUser} setIsRegistered={setIsRegistered}/>)
         : renderView()
       }
     </div> 
