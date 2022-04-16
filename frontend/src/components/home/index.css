@@ -1,20 +1,20 @@
 /* Main Styling for the dashboard interface */
 
 #dashboard-sidebar{
-    margin-top:3vh;
-    padding:0px 10px;
-    margin-bottom:3vh;
-    height:94vh;
+    margin-top:5vh;
+    padding:0px 25px;
+    margin-bottom:5vh;
+    height:auto;
 }
 
 #dashboard-body{
-    padding:20px;
+    padding:30px;
     margin-top:3vh;
-    margin-bottom:3vh;
-    height:94vh;
+    margin-bottom:5vh;
+    height:auto;
     margin-right:20px;
     border-radius:9px;
-    background-color:#F7F8FA;
+    background-color:#f2f4f8;
 }
 
 #app-title{
@@ -106,6 +106,10 @@
     color: #CCC;
 }
 
+.container-browse-project {
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
 
 #modal-submit {
     margin: 20px !important;
