@@ -33,7 +33,7 @@ function RegisterPage(props){
 
     return (
       <div  id="main_container">
-        <h2>Registering as a {user}</h2>
+        <h2>Register as a {user}</h2>
         <Stack component="form" noValidate autoComplete="off" alignItems={"center"}>
             <Stack spacing={2}>
             <FormInput 
@@ -50,7 +50,7 @@ function RegisterPage(props){
             />
             </Stack>
           <Button variant="contained" onClick={register}>
-            Submit
+            Register
           </Button>
 
         </Stack>
