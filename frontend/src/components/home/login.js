@@ -1,18 +1,14 @@
-import {useState } from 'react';
-import {  Button, Stack } from '@mui/material';
-
-import {FormInput} from '../sharedComponents/formComponents'
-
-import isEmail from 'validator/lib/isEmail';
-import isLength from 'validator/lib/isLength';
+import { useState } from 'react';
+import { Button, Stack } from '@mui/material';
+import {FormInput, isValid } from '../sharedComponents/formComponents'
 
 import APIService from '../api'
 
 function LoginPage(props){
 
   const errorMessages = {
-    email:"Make sure you input a valid your email",
-    password:"Please fill in your password"
+    email:"Make sure you input a valid email",
+    password:"Please fill in your password."
   }
 
     // set the initial states for email and passwords
@@ -20,19 +16,6 @@ function LoginPage(props){
           email: { value: "", error: true },
           password: { value:"", error:true }
         });
-
-    function isValid(name, value){
-      switch (name){
-        case "email":
-          if (!isLength(value, {min:1, max: undefined})){ return false }
-          if (!isEmail(value)){ return false }
-          break
-        case "password":
-          if (!isLength(value, {min:1, max: undefined})){ return false }
-          break
-      }
-      return true;
-    }
 
     function handleChange(event) { 
       const {value, name} = event.target;
@@ -73,7 +56,7 @@ function LoginPage(props){
               onChange={handleChange} name="password" value={formData.password.value}
               error={formData.password.error} errorMessage={errorMessages.password} 
             />
-            <Button variant="contained" onClick={login}> Login </Button>
+            <Button disabled={(formData.email.error || formData.password.error)} variant="contained" onClick={login}> Login </Button>
           </Stack>
           <Stack direction={"row"}>
             <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}

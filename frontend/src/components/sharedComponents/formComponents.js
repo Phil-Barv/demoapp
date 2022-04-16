@@ -1,5 +1,9 @@
 import { FormControl, FormHelperText, TextField } from '@mui/material';
 
+import isEmail from 'validator/lib/isEmail';
+import isLength from 'validator/lib/isLength';
+import isStrongPassword from 'validator/lib/isStrongPassword';
+
 export function FormInput (props){
     return (
       <FormControl error={props.error} >
@@ -21,3 +25,21 @@ export function FormInput (props){
       </FormControl>
     )
   }
+
+
+  export function isValid (name, value){
+    switch (name){
+      case "name":
+        if (!isLength(value, {min:4, max: 20 })){ return false }
+        break
+      case "email":
+        if (!isLength(value, {min:1, max: 100 })){ return false }
+        if (!isEmail(value)){ return false }
+        break
+      case "password":
+        if (!isLength(value, {min:1, max: 100 })){ return false }
+        if (!isStrongPassword(value)){ return false }
+        break
+    }
+    return true;
+  };

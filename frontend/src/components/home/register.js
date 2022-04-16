@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { Button, Stack } from '@mui/material';
 
-import {FormInput} from '../sharedComponents/formComponents'
+import { FormInput, isValid } from '../sharedComponents/formComponents'
 import APIService from '../api'
 
 function RegisterPage(props){
 
   const errorMessages = {
-    name:"Please input a name with at least 4 characters",
-    email:"Please input a valid email",
-    password:"Please inpur a valid password"
+    name:"Please input a name between 4 and 20 characters",
+    email:"Please input a valid email that is not above 100 characters",
+    password:"Please input a strong password between 8 and 100 characters,\
+              with at least one number, one symbol, and \
+              one uppercase and one lowercase letter."
   }
 
   const [formData, setFormData] = useState({
@@ -19,10 +21,17 @@ function RegisterPage(props){
     );
 
   function handleChange(event) { 
-    const {value, name} = event.target
-    setFormData(prevNote => ({
-        ...prevNote, [name]: {value:value, error:false}}))
-  };
+    const {value, name} = event.target;
+
+    if (isValid(name, value)){
+      setFormData(prevNote => ({ ...prevNote,
+        [name]: {value: value, error:false}
+      }))
+    } else {
+      setFormData(prevNote => ({ ...prevNote,
+        [name]: {value: value, error:true}
+      }))};
+    }
 
   function register(){
     if (!formData.name.error & !formData.email.error & !formData.password.error){
@@ -53,7 +62,8 @@ function RegisterPage(props){
               error={formData.password.error} errorMessage={errorMessages.password} 
             />
             </Stack>
-          <Button variant="contained" onClick={register}>
+          <Button variant="contained" onClick={register}
+            disabled={(formData.email.error || formData.password.error || formData.name.error)}>
             Register
           </Button>
 
