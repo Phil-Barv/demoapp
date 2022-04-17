@@ -38,14 +38,13 @@ function RegisterPage(props){
 
   function register(){
     if (!formData.name.error & !formData.email.error & !formData.password.error){
-      APIService.Register(
-        props.setIsRegistered,
-        setRegistrationError,
-        props.user,
-        formData.name.value,
-        formData.email.value,
-        formData.password.value);
-    }
+      APIService.Register( props.user, formData.name.value, formData.email.value, formData.password.value).
+        then((response) => 
+          {(response.registered)
+            ? props.setIsRegistered(true)
+            : setRegistrationError(true)
+          })
+    };
   };
 
     return (

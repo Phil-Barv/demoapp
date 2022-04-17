@@ -34,52 +34,50 @@ function LoginPage(props){
       }
     
     function login(event){
-
       event.preventDefault();
-
-      if (!formData.email.error & !formData.password.error){
-        APIService.UserLogin(
-          props.setToken,
-          setLoginError,
-          props.user,
-          formData.email.value,
-          formData.password.value);
-      }
+      if (!formData.email.error & !formData.password.error) {
+        APIService.Login( props.user, formData.email.value, formData.password.value)
+          .then((response) => 
+            {(response.access_token)
+              ? props.setToken(response.access_token) 
+              : setLoginError(true)
+            })
+      };
     }
 
-      return (
-        <div id="main_container">
-          <h2>Login as {props.user}</h2>
-          <Stack component="form" noValidate autoComplete="off" alignItems="center">
-            { (loginError)
-              ? <FormErrorMessage message={errorMessages.login} />
-              : "" 
-            }
-            <Stack spacing={2} alignItems="center">
-            <FormInput 
-              onChange={handleChange} name="email" value={formData.email.value}
-              error={formData.email.error} errorMessage={errorMessages.email} 
-            />
-            <FormInput 
-              onChange={handleChange} name="password" value={formData.password.value}
-              error={formData.password.error} errorMessage={errorMessages.password} 
-            />
-            <Button disabled={(formData.email.error || formData.password.error)} variant="contained" onClick={login}> Login </Button>
-          </Stack>
-          <Stack direction={"row"}>
-            <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}
-              onClick={()=>props.setUser((props.user=="Donor")?"Charity":"Donor")}>
-                Login as {(props.user=="Donor")?"Charity":"Donor"}
-            </Button>
+    return (
+      <div id="main_container">
+        <h2>Login as {props.user}</h2>
+        <Stack component="form" noValidate autoComplete="off" alignItems="center">
+          { (loginError)
+            ? <FormErrorMessage message={errorMessages.login} />
+            : "" 
+          }
+          <Stack spacing={2} alignItems="center">
+          <FormInput 
+            onChange={handleChange} name="email" value={formData.email.value}
+            error={formData.email.error} errorMessage={errorMessages.email} 
+          />
+          <FormInput 
+            onChange={handleChange} name="password" value={formData.password.value}
+            error={formData.password.error} errorMessage={errorMessages.password} 
+          />
+          <Button disabled={(formData.email.error || formData.password.error)} variant="contained" onClick={login}> Login </Button>
+        </Stack>
+        <Stack direction={"row"}>
+          <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}
+            onClick={()=>props.setUser((props.user=="Donor")?"Charity":"Donor")}>
+              Login as {(props.user=="Donor")?"Charity":"Donor"}
+          </Button>
 
-            <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}
-              onClick={()=>props.setIsRegistered(false)}>
-                Register Instead
-            </Button>
-        </Stack>
-        </Stack>
-        </div>
-      );
+          <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}
+            onClick={()=>props.setIsRegistered(false)}>
+              Register Instead
+          </Button>
+      </Stack>
+      </Stack>
+      </div>
+    );
 }
 
 export default LoginPage;

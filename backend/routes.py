@@ -49,6 +49,7 @@ def create_token():
     user = request.json.get("user", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+    response = { "access_token ": False }
 
     if user and email and password:
 
@@ -57,10 +58,9 @@ def create_token():
         if user_in_database:
             if bcrypt.check_password_hash(user_in_database.password, password):
                 access_token = create_access_token(identity=email)
-                response = {"access_token":access_token}
-                return response
+                response["access_token"] = access_token
     
-    return 401
+    return response
 
 
 @app.route("/logout", methods=["POST"])

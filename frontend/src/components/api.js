@@ -50,46 +50,24 @@ export default class APIService{
     .catch(error => console.log(error))
     };
 
-    static UserLogin(setToken, setLoginError, user, email, password) {
-      axios({
-        method: "POST",
-        url:"/token",
-        data:{
-          user: user,
-          email: email,
-          password: password
-         }
-      })
-      .then((response) => {
-        if (response.data.access_token){
-          setToken(response.data.acdcess_token)
-        } else {setLoginError(true)};
-      }).catch((error) => { setLoginError(true) })
-    }
+    static async Login(user, email, password) {
 
-    static Register(setIsRegistered, setRegistrationError, user, name, email, password) {
-      axios({
-        method: "POST",
-        url:"/register",
-        data:{
-          user: user,
-          name: name,
-          email: email,
-          password: password
-         }
-      })
-      .then((response) => {
-        if(response.data.registered==true){
-          setIsRegistered(true);
-        } else {setRegistrationError(true)};
-      }).catch((error) => {
-        if (error.response) {
-          console.log(error.response)
-          console.log(error.response.status)
-          console.log(error.response.headers)
-          }
-      })
-    }
+      const data = {  user: user,
+                      email: email,
+                      password: password }
   
+      const response = await axios.post("/token", data); 
+      return response.data
+    }
 
+    static async Register(user, name, email, password) {
+      
+      const data =  { user: user,
+                      name: name,
+                      email: email,
+                      password: password }
+
+      const response = await axios.post("/register", data);
+      return response.data
+    }
 }
