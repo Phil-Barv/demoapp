@@ -46,7 +46,6 @@ def get_user_by_email(user, email):
 @app.route('/token', methods=["POST"])
 def create_token():
 
-
     user = request.json.get("user", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
@@ -61,7 +60,7 @@ def create_token():
                 response = {"access_token":access_token}
                 return response
     
-    return {"msg": "Wrong email or password"}, 401
+    return 401
 
 
 @app.route("/logout", methods=["POST"])

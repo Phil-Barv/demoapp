@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Button, Stack } from '@mui/material';
 
-import { FormInput, isValid } from '../sharedComponents/formComponents'
+import { FormInput, isValid, FormErrorMessage } from '../sharedComponents/formComponents'
 import APIService from '../api'
 
 function RegisterPage(props){
 
   const errorMessages = {
+    registration: "Registration unsuccessful. Have you used this email for another account?",
     name:"Please input a name between 4 and 20 characters",
     email:"Please input a valid email that is not above 100 characters",
     password:"Please input a strong password between 8 and 100 characters,\
@@ -19,6 +20,8 @@ function RegisterPage(props){
     email: {value:"", error:true},
     password: {value:"", error:true}}
     );
+
+  const [registrationError, setRegistrationError] = useState(false);
 
   function handleChange(event) { 
     const {value, name} = event.target;
@@ -37,6 +40,7 @@ function RegisterPage(props){
     if (!formData.name.error & !formData.email.error & !formData.password.error){
       APIService.Register(
         props.setIsRegistered,
+        setRegistrationError,
         props.user,
         formData.name.value,
         formData.email.value,
@@ -47,7 +51,12 @@ function RegisterPage(props){
     return (
       <div  id="main_container">
         <h2>Register as a {props.user}</h2>
-        <Stack component="form" noValidate autoComplete="off" alignItems={"center"}>
+      
+        <Stack component="form" noValidate autoComplete="off" alignItems="center">
+            { (registrationError)
+              ? <FormErrorMessage message={errorMessages.registration} />
+              : "" 
+            }
             <Stack spacing={2}>
             <FormInput 
               onChange={handleChange} name="name" value={formData.name.value}

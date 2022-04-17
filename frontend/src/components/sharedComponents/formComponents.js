@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, TextField } from '@mui/material';
+import { Box, FormControl, FormHelperText, TextField, Typography } from '@mui/material';
 
 import isEmail from 'validator/lib/isEmail';
 import isLength from 'validator/lib/isLength';
@@ -43,3 +43,13 @@ export function FormInput (props){
     }
     return true;
   };
+
+export function FormErrorMessage (props){
+
+  return (
+    <Typography sx={{color:"000000", textAlign:"center"}} mb={3} 
+      variant="caption" display="block" width={250}>
+        {props.message}
+    </Typography>
+  )
+}

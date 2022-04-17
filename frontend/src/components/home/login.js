@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Button, Stack } from '@mui/material';
-import {FormInput, isValid } from '../sharedComponents/formComponents'
+import {FormInput, isValid, FormErrorMessage } from '../sharedComponents/formComponents'
 
 import APIService from '../api'
 
 function LoginPage(props){
 
   const errorMessages = {
+    login:"Unable to login. Email or password might be incorrect or you must switch between Donor and Charity",
     email:"Make sure you input a valid email",
     password:"Please fill in your password."
   }
@@ -16,6 +17,8 @@ function LoginPage(props){
           email: { value: "", error: true },
           password: { value:"", error:true }
         });
+
+    const [loginError, setLoginError] = useState(false);
 
     function handleChange(event) { 
       const {value, name} = event.target;
@@ -37,6 +40,7 @@ function LoginPage(props){
       if (!formData.email.error & !formData.password.error){
         APIService.UserLogin(
           props.setToken,
+          setLoginError,
           props.user,
           formData.email.value,
           formData.password.value);
@@ -46,7 +50,11 @@ function LoginPage(props){
       return (
         <div id="main_container">
           <h2>Login as {props.user}</h2>
-          <Stack component="form" noValidate autoComplete="off">
+          <Stack component="form" noValidate autoComplete="off" alignItems="center">
+            { (loginError)
+              ? <FormErrorMessage message={errorMessages.login} />
+              : "" 
+            }
             <Stack spacing={2} alignItems="center">
             <FormInput 
               onChange={handleChange} name="email" value={formData.email.value}

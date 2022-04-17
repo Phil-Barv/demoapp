@@ -50,7 +50,7 @@ export default class APIService{
     .catch(error => console.log(error))
     };
 
-    static UserLogin(setToken, user, email, password) {
+    static UserLogin(setToken, setLoginError, user, email, password) {
       axios({
         method: "POST",
         url:"/token",
@@ -61,19 +61,13 @@ export default class APIService{
          }
       })
       .then((response) => {
-        console.log(response.data);
-        setToken(response.data.access_token)
-      }).catch((error) => {
-        if (error.response) {
-          console.log(error.response)
-          console.log(error.response.status)
-          console.log(error.response.headers)
-          }
-      })
-
+        if (response.data.access_token){
+          setToken(response.data.acdcess_token)
+        } else {setLoginError(true)};
+      }).catch((error) => { setLoginError(true) })
     }
 
-    static Register(setIsRegistered, user, name, email, password) {
+    static Register(setIsRegistered, setRegistrationError, user, name, email, password) {
       axios({
         method: "POST",
         url:"/register",
@@ -87,7 +81,7 @@ export default class APIService{
       .then((response) => {
         if(response.data.registered==true){
           setIsRegistered(true);
-        };
+        } else {setRegistrationError(true)};
       }).catch((error) => {
         if (error.response) {
           console.log(error.response)
