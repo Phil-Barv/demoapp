@@ -48,29 +48,36 @@ function LoginPage(props){
     return (
       <div id="main_container">
         <h2>Login as {props.user}</h2>
-        <Stack component="form" noValidate autoComplete="off" alignItems="center">
+        <Stack data-testid="loginForm"
+          component="form" noValidate autoComplete="off" alignItems="center">
           { (loginError)
             ? <FormErrorMessage message={errorMessages.login} />
             : "" 
           }
           <Stack spacing={2} alignItems="center">
-          <FormInput 
+          <FormInput testid="emailInputField"
             onChange={handleChange} name="email" value={formData.email.value}
-            error={formData.email.error} errorMessage={errorMessages.email} 
+            error={formData.email.error} errorMessage={errorMessages.email}
           />
-          <FormInput 
+          <FormInput testid="passwordInputField"
             onChange={handleChange} name="password" value={formData.password.value}
             error={formData.password.error} errorMessage={errorMessages.password} 
           />
-          <Button disabled={(formData.email.error || formData.password.error)} variant="contained" onClick={login}> Login </Button>
+          <Button data-testid="loginSubmitButton"
+              disabled={(formData.email.error || formData.password.error)}
+              variant="contained" onClick={login}>
+            Login
+          </Button>
         </Stack>
         <Stack direction={"row"}>
-          <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}
+          <Button variant="contained"
+            sx={{backgroundColor:"white", color:"black"}}
             onClick={()=>props.setUser((props.user=="Donor")?"Charity":"Donor")}>
               Login as {(props.user=="Donor")?"Charity":"Donor"}
           </Button>
 
-          <Button variant="contained" sx={{backgroundColor:"white", color:"black"}}
+          <Button data-testid="registerInsteadButton" variant="contained" 
+            sx={{backgroundColor:"white", color:"black"}}
             onClick={()=>props.setIsRegistered(false)}>
               Register Instead
           </Button>

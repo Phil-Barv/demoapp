@@ -7,7 +7,9 @@ import isStrongPassword from 'validator/lib/isStrongPassword';
 export function FormInput (props){
     return (
       <FormControl error={props.error} >
-        <TextField sx={{backgroundColor:"rgba(255, 255, 255, 1)", borderRadius:"4px"}}
+        <TextField
+          inputProps={{ "data-testid": props.testid}}
+          sx={{backgroundColor:"rgba(255, 255, 255, 1)", borderRadius:"4px"}}
           label={props.name}
           name={props.name}
           value={props.value}
