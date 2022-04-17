@@ -80,7 +80,7 @@ function CharityDashboard(props) {
   </React.Fragment>
       </List>
       <Typography component="h1" id="app-title">
-          donatello
+          Limpid
         </Typography>
     </Stack>
           <Container id="dashboard-body">

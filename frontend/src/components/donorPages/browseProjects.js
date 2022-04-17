@@ -7,6 +7,7 @@
 
   import React, { useState, useEffect } from 'react';
 
+  import Grid from '@mui/material/Grid';
   import Typography from "@mui/material/Typography";
   import Stack from "@mui/material/Stack";
   import Paper from "@mui/material/Paper";
@@ -45,9 +46,10 @@
           <Stack spacing={2}>
           <Typography variant="h3">Find Meaningful Projects</Typography>
           <Typography variant="h4">Popular Near You Yo</Typography>
-          <Stack direction="row" spacing={3}>
+          <Grid container rowSpacing={3}>
             {projects.map((project, i) => {
               return(
+                <Grid item xs={8} sm={4} >
                 <div key={i}>
                 <ProjectCard
                   pk={project["id"]}
@@ -58,10 +60,11 @@
                   setCurrentProject={setCurrentProject}
                 />
               </div>
+              </Grid>
               )
             })
             }
-          </Stack>
+          </Grid>
         
           </Stack>
         }

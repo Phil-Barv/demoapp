@@ -48,17 +48,17 @@ function DonorRegistration(props){
         <div>
             <form>
               <input onChange={handleChange} 
-                    type="email"
-                    text={registerForm.email} 
-                    name="email" 
-                    placeholder="Email" 
-                    value={registerForm.email} />
-              <input onChange={handleChange} 
                     type="text"
                     text={registerForm.username} 
                     name="username" 
                     placeholder="Username" 
                     value={registerForm.username} />
+              <input onChange={handleChange} 
+                    type="email"
+                    text={registerForm.email} 
+                    name="email" 
+                    placeholder="Email" 
+                    value={registerForm.email} />
               <input onChange={handleChange} 
                     type="password"
                     text={registerForm.password} 
