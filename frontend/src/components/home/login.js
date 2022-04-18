@@ -47,7 +47,7 @@ function LoginPage(props){
 
     return (
       <div id="main_container">
-        <h2>Login as {props.user}</h2>
+        <h2 data-testid="formHeading">Login as {props.user}</h2>
         <Stack data-testid="loginForm"
           component="form" noValidate autoComplete="off" alignItems="center">
           { (loginError)
