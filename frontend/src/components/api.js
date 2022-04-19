@@ -50,6 +50,24 @@ export default class APIService{
     .catch(error => console.log(error))
     };
 
-    
+    static async Login(user, email, password) {
 
+      const data = {  user: user,
+                      email: email,
+                      password: password }
+  
+      const response = await axios.post("/token", data); 
+      return response.data
+    }
+
+    static async Register(user, name, email, password) {
+      
+      const data =  { user: user,
+                      name: name,
+                      email: email,
+                      password: password }
+
+      const response = await axios.post("/register", data);
+      return response.data
+    }
 }
