@@ -135,6 +135,7 @@ def createProject():
         title = request.json['title']
         description = request.json['description']
         image_url = request.json['image_url']
+        #raised_amount=request.json['raised_amount']
         # goal = request.json['goal']
         # deadline = datetime.strptime(request.json['deadline'], '%Y-%m-%dT%H:%M')
         target_amount = request.json['targetAmount']
@@ -167,7 +168,7 @@ def updateProject(id):
     if request.method == 'POST':
         if project:
             
-            print('Fetching new info') 
+            #print('Fetching new info') 
             title = request.json['title']
             description = request.json['description']
             image_url = request.json['image_url']
@@ -216,6 +217,30 @@ def deleteProject(id):
         return { "response": 200 }
     return { "response": 500 }
 
+#donate to a project implementation
+#would have to look this up and complete the rest
+@app.route('/project/<int:id>/donate', methods=['GET','POST'])
+@jwt_required()
+def donateProject(id):
+    project = Project.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if project:
+            raise_amount = request.json['raise_amount']
+            #id  = request.json['id']
+
+        #if the amount is zero
+        if raise_amount==0:
+            project.raise_amount = raise_amount
+        else:
+            project.raise_amount+=raise_amount
+            
+        db.session.commit()
+        return { "response": 200 }
+    return { "response": 500 }
+
+    
+
+
 
 @app.route("/register-donor", methods=["POST"])
 def register_donor():
@@ -236,6 +261,9 @@ def register_donor():
     db.session.commit()
 
     return { "response": 200 }
+
+
+
 
 #login user
 '''
