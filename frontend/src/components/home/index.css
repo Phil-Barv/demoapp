@@ -24,6 +24,9 @@
     text-align:center;
 }
 
+
+/* Login/ Sign Up Page */
+
 #main_container{
     display:flex;
     flex-direction:column;
@@ -144,11 +147,9 @@
 
 }
 
-
 #side-column-card h2 {
     color: white;
 }
-
 
 #side-column-card button {
     border-radius: 11px;
@@ -172,3 +173,65 @@
 #project-page-photo {
     border-radius: 11px;
 }
+
+
+/* Home Page */
+
+.container-home {
+    background: linear-gradient(to bottom left, rgb(69, 69, 209), pink);
+    border-radius: 10px;
+    box-shadow: 10px 5px 20px 10px rgba(2, 0, 0, 0.1);
+    min-width: min-content;
+    min-height: max-content;
+    opacity: 0.75;
+    padding: 17px;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.container-home h2 {
+    margin: 15px !important;
+    padding: 0 !important;
+    color: rgb(235, 234, 234);
+}
+
+.container-home form {
+    margin: 0 auto;
+    max-width: 300px;
+    padding: 4em;
+    border: 1px solid #CCC;
+    border-radius: 10px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.container-home input, textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    padding-left: 20px;
+    border-radius: 15px;
+    border-color: #CCC;
+    border-width: 0.1px;
+    width: 250px;
+}
+
+.container-home button {
+    display: flex;
+    width: 130px;
+    justify-content: center;
+    border-radius: 15px;
+    border-width: 0.1px;
+    border-color: #CCC;
+    padding: 5px;
+    margin: 9px !important;
+    margin-top: 30px;
+}
+
+.container-home button:hover {
+    background: linear-gradient(to bottom left, rgb(69, 69, 209), pink);
+    cursor: pointer;
+}
+
+
