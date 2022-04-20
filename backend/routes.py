@@ -1,14 +1,12 @@
 from backend import app,db,bcrypt
-from flask import render_template, request, redirect
 
 import json
 from datetime import datetime, timedelta, timezone
-from flask import render_template, request, redirect, jsonify
+from flask import request, jsonify
 
 from backend.models.charity import Charity
 from backend.models.donor import Donor
 from backend.models.project import Project
-from backend.forms import DonorSignUpForm, DonorLoginForm
 
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, unset_jwt_cookies, jwt_required
 from datetime import datetime
