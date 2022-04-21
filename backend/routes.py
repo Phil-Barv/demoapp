@@ -1,3 +1,4 @@
+from logging import raiseExceptions
 from backend import app,db,bcrypt
 from flask import render_template, request, redirect
 
@@ -218,22 +219,22 @@ def deleteProject(id):
     return { "response": 500 }
 
 #donate to a project implementation
-#would have to look this up and complete the rest
 @app.route('/project/<int:id>/donate', methods=['GET','POST'])
 @jwt_required()
-def donateProject(id):
+def donate_project(id):
     project = Project.query.filter_by(id=id).first()
     if request.method == 'POST':
         if project:
             raise_amount = request.json['raise_amount']
-            #id  = request.json['id']
 
-        #if the amount is zero
-        if raise_amount==0:
-            project.raise_amount = raise_amount
-        else:
+        #if the amount is not zero
+        if raise_amount!=0:
             project.raise_amount+=raise_amount
             
+        else:
+            return{
+                "response": "please enter a valid number"
+            }
         db.session.commit()
         return { "response": 200 }
     return { "response": 500 }
