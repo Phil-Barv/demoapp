@@ -238,31 +238,47 @@ def donate_project(id):
         db.session.commit()
         return { "response": 200 }
     return { "response": 500 }
-
     
 
 
+def create_user(user, name, email, password):
 
-@app.route("/register-donor", methods=["POST"])
-def register_donor():
+    try:
+        if user == "Donor":
+            created_user = Donor(
+                username=name,
+                email=email,
+                password=bcrypt.generate_password_hash(password),
+            )
+        else:
+            created_user = Charity(
+                charity_name=name,
+                email=email,
+                password=bcrypt.generate_password_hash(password),
+            )
+        db.session.add(created_user)
+        db.session.commit()
+        return True
+    except:
+        return False
+
+@app.route("/register", methods=["POST"])
+def register():
 
     #pass all the necessary  requirement
-    username= request.json.get("username", None)
+    user = request.json.get("user", None)
+    name= request.json.get("name", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
 
-    #we create an instance of project class
-    donor = Donor(
-        username=username,
-        email=email,
-        password=bcrypt.generate_password_hash(password),
-        )
+    registered = False
 
-    db.session.add(donor)
-    db.session.commit()
+    if name and email and password and user in ["Donor","Charity"]:
+        user_created = create_user(user, name, email, password)
+        if user_created:
+            registered = True
 
-    return { "response": 200 }
-
+    return { "registered": registered }
 
 
 
