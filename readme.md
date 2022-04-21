@@ -66,7 +66,7 @@ python app.py
 > ```
 
 
-This app also features tests that you can run by accessing the /tests directory. To successfully run the tests you will need to be in the virtual environment venv, with the necessary packages in the requirements.txt already pip installed. While in the /tests directory, run the following command:
+This app also features tests that you can run by accessing the /tests directory. To successfully run the tests you will need to be in the virtual environment venv, with the necessary packages in the requirements.txt already pip installed and the backend running at localhost 5000. While in the /tests directory, run the following command:
 
 ```python
 python3.6 -m unittest discover
