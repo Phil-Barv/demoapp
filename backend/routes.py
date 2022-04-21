@@ -159,6 +159,7 @@ def createProject():
             "response": 200
         }
 
+
 #update project 
 @app.route('/project/<int:id>/update',methods = ['GET','POST'])
 def updateProject(id):
@@ -241,6 +242,7 @@ def donate_project(id):
     
 
 
+
 def create_user(user, name, email, password):
 
     try:
@@ -261,6 +263,7 @@ def create_user(user, name, email, password):
         return True
     except:
         return False
+
 
 @app.route("/register", methods=["POST"])
 def register():
