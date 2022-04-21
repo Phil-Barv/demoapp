@@ -37,19 +37,31 @@ def refresh_expiring_jwts(response):
         # Case where there is not a valid JWT. Just return the original respone
         return response
 
+def get_user_by_email(user, email):
+    if user == "Donor":
+        return Donor.query.filter_by(email=email).first()
+    elif user == "Charity":
+        return Charity.query.filter_by(email=email).first()
+    return False
+
 @app.route('/token', methods=["POST"])
 def create_token():
+
+    user = request.json.get("user", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    donor = Donor.query.filter_by(email=email).first() 
+    response = { "access_token ": False }
 
-    if donor:
-        if bcrypt.check_password_hash(donor.password, password):
-            access_token = create_access_token(identity=email)
-            response = {"access_token":access_token}
-            return response
+    if user and email and password:
+
+        user_in_database = get_user_by_email(user, email)
+
+        if user_in_database:
+            if bcrypt.check_password_hash(user_in_database.password, password):
+                access_token = create_access_token(identity=email)
+                response["access_token"] = access_token
     
-    return {"msg": "Wrong email or password"}, 401
+    return response
 
 
 @app.route("/logout", methods=["POST"])
@@ -206,7 +218,6 @@ def updateProject(id):
     }
 
 #delete project
-
 @app.route('/project/<int:id>/delete', methods=['GET','POST'])
 def deleteProject(id):
     
@@ -219,6 +230,9 @@ def deleteProject(id):
         return { "response": 200 }
     return { "response": 500 }
 
+
+
+  
 #donate to a project implementation
 @app.route('/project/<int:id>/donate', methods=['GET','POST'])
 @jwt_required()
@@ -240,9 +254,6 @@ def donate_project(id):
         return { "response": 200 }
     return { "response": 500 }
     
-
-
-
 def create_user(user, name, email, password):
 
     try:

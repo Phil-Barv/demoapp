@@ -19,8 +19,6 @@ import AddProjectForm from '../charityPages/addProjectForm';
 import BrowseProjects from '../charityPages/browseProjects';
 
 
-import "./index.css"
-
 function CharityDashboard(props) {
 
   const [state, setState] = useState(0);
