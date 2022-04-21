@@ -137,7 +137,7 @@ const ProjectPage = (props) => {
                             open={openM2}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description"
-                            className="container"
+                            className="container-home"
                           >
                             <Grid >
                               <Grid >
@@ -204,7 +204,7 @@ const ProjectPage = (props) => {
                             sx ={style}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description"
-                            className="container"
+                            className="container-home"
                           >
                             <Stack>
                               <h2>Are you sure you want to delete this project?</h2>

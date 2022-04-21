@@ -12,6 +12,9 @@
 /.pnp
 .pnp.js
 
+# TESTS
+**/__pycache__/
+
 # testing
 **/coverage/
 

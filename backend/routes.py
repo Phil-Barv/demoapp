@@ -1,14 +1,12 @@
 from backend import app,db,bcrypt
-from flask import render_template, request, redirect
 
 import json
 from datetime import datetime, timedelta, timezone
-from flask import render_template, request, redirect, jsonify
+from flask import request, jsonify
 
 from backend.models.charity import Charity
 from backend.models.donor import Donor
 from backend.models.project import Project
-from backend.forms import DonorSignUpForm, DonorLoginForm
 
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, unset_jwt_cookies, jwt_required
 from datetime import datetime
@@ -87,7 +85,6 @@ def index():
 #Get all projects
 #retreiving  all projects
 @app.route('/project', methods =['GET'])
-
 @jwt_required()
 def getAllProjects():
     projects = Project.query.all()
@@ -123,6 +120,7 @@ def getOneProject(id):
     
 #Creating a new project
 @app.route('/project/create', methods = ['POST'], strict_slashes=False)
+@jwt_required()
 def createProject():
 
     # deleting this GET to make this an api call instead
@@ -171,6 +169,7 @@ def createProject():
 
 #update project 
 @app.route('/project/<int:id>/update',methods = ['GET','POST'])
+@jwt_required()
 def updateProject(id):
   
     project = Project.query.filter_by(id=id).first()
@@ -217,6 +216,7 @@ def updateProject(id):
 #delete project
 
 @app.route('/project/<int:id>/delete', methods=['GET','POST'])
+@jwt_required()
 def deleteProject(id):
     
     project = Project.query.filter_by(id=id).first()
@@ -227,27 +227,6 @@ def deleteProject(id):
             db.session.commit()
         return { "response": 200 }
     return { "response": 500 }
-
-def create_user(user, name, email, password):
-
-    try:
-        if user == "Donor":
-            created_user = Donor(
-                username=name,
-                email=email,
-                password=bcrypt.generate_password_hash(password),
-            )
-        else:
-            created_user = Charity(
-                charity_name=name,
-                email=email,
-                password=bcrypt.generate_password_hash(password),
-            )
-        db.session.add(created_user)
-        db.session.commit()
-        return True
-    except:
-        return False
 
 
 @app.route("/register", methods=["POST"])
@@ -268,32 +247,25 @@ def register():
 
     return { "registered": registered }
 
-#login user
-'''
-@app.route("/login/", methods=["POST", "GET"])
-def login():
 
-    #note: no parameters are passed into the form
-    form = DonorLoginForm()
+def create_user(user, name, email, password):
 
-    if form.validate_on_submit():
-        #we can create a join table called users containing all charities and donors
-        user = Donor.query.filter_by(email=form.email.data).first() 
-
-        if user:
-            if bcrypt.check_password_hash(user.password, form.password.data):
-                login_user(user)
-                return redirect(url_for('home'))
-            else:
-                flash(f"Oops, you put the wrong password, {form.email.data}. Try again.", "info") 
+    try:
+        if user == "Donor":
+            created_user = Donor(
+                username=name,
+                email=email,
+                password=bcrypt.generate_password_hash(password),
+            )
         else:
-            flash(f"{form.email.data}, please create an account!", "info")
-    
-    return render_template("login.html", form=form)
-
-
-@app.route("/logout", methods=["POST", "GET"])
-def logout():
-    logout_user()
-    return redirect(url_for('main.index'))
-'''
+            created_user = Charity(
+                charity_name=name,
+                email=email,
+                password=bcrypt.generate_password_hash(password),
+            )
+        db.session.add(created_user)
+        db.session.commit()
+        return True
+        
+    except:
+        return False
