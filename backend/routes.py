@@ -280,8 +280,6 @@ def register():
 
     return { "registered": registered }
 
-
-
 #login user
 '''
 @app.route("/login/", methods=["POST", "GET"])
