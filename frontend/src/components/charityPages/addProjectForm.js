@@ -29,10 +29,10 @@ const AddProjectForm = (props) => {
       event.preventDefault()
       addProject()
     }
-
+    
   return (
        <div>
-       <form onSubmit = {handleSubmit} >
+       <form data-testid="add-project-form" onSubmit = {handleSubmit} >
             
             <label htmlFor="title" className="form-label">Title</label>
             <input 
@@ -87,8 +87,7 @@ const AddProjectForm = (props) => {
                 onChange={(e)=>setRaisedAmount(e.target.value)}
                 required />
 
-
-            <button> create project </button>
+            <button data-testid="add-project-submit-button"> create project </button>
 
             </form>
        </div>

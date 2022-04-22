@@ -65,6 +65,10 @@ python app.py
 > npm start \
 > ```
 
+9. To run tests for frontend.
+```javascript
+npm test \
+```
 
 This app also features tests that you can run by accessing the /tests directory. To successfully run the tests you will need to be in the virtual environment venv, with the necessary packages in the requirements.txt already pip installed. While in the /tests directory, run the following command:
 
