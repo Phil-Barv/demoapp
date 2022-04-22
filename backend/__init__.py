@@ -4,14 +4,17 @@ from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 from datetime import timedelta
 
+from config import flask_env
 
-#direct app to the index.html file created after running npm build ### to use when deploying to heroku
-#app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
+if flask_env == "production":
+    #direct app to the index.html file created after running npm build
+    app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 
-app = Flask(__name__)
+if flask_env == "development":
+    app = Flask(__name__)
 
 
-app.secret_key = "VerySecretKey" #change before deployment
+app.secret_key = "VerySecretKey" #doesnt matter as this is demo deployment
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #removes modifications to database warnings
 app.config["JWT_SECRET_KEY"] = "please-remember-to-change-me"

@@ -12,10 +12,23 @@ from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, uns
 from datetime import datetime
 
 
-#from flask import send_from_directory
-#from flask_cors import CORS, cross_origin ###for when we want to host on heroku
+from flask import send_from_directory
+from flask_cors import CORS, cross_origin ###for when we want to host on heroku
 
-#CORS(app)
+CORS(app)
+
+@app.route('/api', methods=['GET'])
+@cross_origin()
+def index():
+    return {
+        "tutorial": "Flask React Heroku"
+    }
+
+@app.route('/')
+@cross_origin()
+def serve():
+    return send_from_directory(app.static_folder, 'index.html') 
+
 
 @app.after_request
 def refresh_expiring_jwts(response):
@@ -66,21 +79,6 @@ def logout():
     response = jsonify({"msg": "logout successful"})
     unset_jwt_cookies(response)
     return response
-
-@app.route('/api', methods=['GET'])
-#@cross_origin()
-def index():
-    return {
-        "tutorial": "Flask React Heroku"
-    }
-
-
-### For when we're hosting on heroku
-# @app.route('/')
-# @cross_origin()
-# def serve():
-#     return send_from_directory(app.static_folder, 'index.html') 
-
 
 #Get all projects
 #retreiving  all projects
