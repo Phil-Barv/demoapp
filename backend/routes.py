@@ -1,3 +1,4 @@
+from logging import raiseExceptions
 from backend import app,db,bcrypt
 from flask import render_template, request, redirect
 
@@ -147,6 +148,7 @@ def createProject():
         title = request.json['title']
         description = request.json['description']
         image_url = request.json['image_url']
+        #raised_amount=request.json['raised_amount']
         # goal = request.json['goal']
         # deadline = datetime.strptime(request.json['deadline'], '%Y-%m-%dT%H:%M')
         target_amount = request.json['targetAmount']
@@ -169,6 +171,7 @@ def createProject():
             "response": 200
         }
 
+
 #update project 
 @app.route('/project/<int:id>/update',methods = ['GET','POST'])
 def updateProject(id):
@@ -179,7 +182,7 @@ def updateProject(id):
     if request.method == 'POST':
         if project:
             
-            print('Fetching new info') 
+            #print('Fetching new info') 
             title = request.json['title']
             description = request.json['description']
             image_url = request.json['image_url']
@@ -215,7 +218,6 @@ def updateProject(id):
     }
 
 #delete project
-
 @app.route('/project/<int:id>/delete', methods=['GET','POST'])
 def deleteProject(id):
     
@@ -228,6 +230,30 @@ def deleteProject(id):
         return { "response": 200 }
     return { "response": 500 }
 
+
+
+  
+#donate to a project implementation
+@app.route('/project/<int:id>/donate', methods=['GET','POST'])
+@jwt_required()
+def donate_project(id):
+    project = Project.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if project:
+            raise_amount = request.json['raise_amount']
+
+        #if the amount is not zero
+        if raise_amount!=0:
+            project.raise_amount+=raise_amount
+            
+        else:
+            return{
+                "response": "please enter a valid number"
+            }
+        db.session.commit()
+        return { "response": 200 }
+    return { "response": 500 }
+    
 def create_user(user, name, email, password):
 
     try:
