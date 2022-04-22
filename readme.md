@@ -64,3 +64,24 @@ python app.py
 > ```javascript
 > npm start \
 > ```
+
+
+This app also features tests that you can run by accessing the /tests directory. To successfully run the tests you will need to be in the virtual environment venv, with the necessary packages in the requirements.txt already pip installed. While in the /tests directory, run the following command:
+
+```python
+python3.6 -m unittest discover
+```
+
+<br>
+
+## Deployment
+Heroku is currently the best tool for deployment as it is FREE.
+
+With the Procfile included, follow these steps:
+
+1. Have admin permission to be able to add and deploy your repo to Heroku
+2. Create a database for your website. [Heroku Postgres](https://dev.to/prisma/how-to-setup-a-free-postgresql-database-on-heroku-1dc1) is recommended.
+3. Add environment variables ([Resource](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-dashboard))
+
+
+Note: You can find an already deployed version here: [Limpid - Charitable Donations](https://polar-crag-67240.herokuapp.com/).
