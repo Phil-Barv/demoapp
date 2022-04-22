@@ -19,8 +19,6 @@ import ProjectBrowser from '../donorPages/browseProjects';
 import YourDonations from '../donorPages/yourDonations';
 import EditProfile from '../donorPages/editProfile'; 
 
-import "./index.css"
-
 function DonorDashboard(props) {
 
   const [state, setState] = useState(1);
